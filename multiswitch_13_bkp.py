@@ -203,7 +203,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             indice = "%s-%s" % (src, dst)
             self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port, 'path' : path}
         else:
-            self.logger.info("===> Destino nao conhecido")
+            #self.logger.info("===> Destino nao conhecido")
             for sw in self.net.nodes():
                 access_ports = set(self.net.node[sw]['ports']) - set(self.net.node[sw]['backbone_ports'])
                 self.logger.info("=====> sw=%s ports=%s backbone_ports=%s access_ports=%s" %
@@ -223,21 +223,54 @@ class SimpleSwitch13(app_manager.RyuApp):
         #newpath = nx.shortest_path(self.net, self.src, self.dst)
 
         """
-         (10.10.10.1) h1 -- sw1 --- sw4 -- h4 (10.10.10.3)
+        					 ------ sw5 -- h5 (10.10.10.5)
+       						 |		 | 
+         (10.10.10.1) h1 -- sw1     sw4 -- h4 (10.10.10.4)
                              |       |
          (10.10.10.2) h2 -- sw2-----sw3 -- h3 (10.10.10.3)
+         							 |
         """
-        if client_ip == "10.10.10.1":
+        if client_ip == "10.0.0.1":
             # oldpath = sw1 <-> sw2
-            # newpath = sw1 <-> sw4 <-> sw3 <-> sw2
-            newpath = [1,4,3,2]
+            # newpath = sw1 <-> sw5 <-> sw4 <-> sw3 <-> sw2
+            print "Modifica fluxos do no 1"
+            newpath = [1,5,4,3,2]
             src = "00:00:00:00:00:01"
             dst = "00:00:00:00:00:02"
             self.modifica_fluxos(src, dst, newpath)
-        elif client_ip == "10.10.10.3":
+
+        elif client_ip == "10.0.0.3":
+            
             print "modifica fluxos do no 3"
+            newpath = [3,4,5,1,2]
+            src = "00:00:00:00:00:03"
+            dst = "00:00:00:00:00:02"
+            self.modifica_fluxos(src, dst, newpath)
+            
             # oldpath = sw3 <-> sw2
-            # newpath = sw3 <-> sw4 <-> sw1 <-> sw2
+            # newpath = sw3 <-> sw4 <-> sw5 <-> sw1 <-> sw2
+        
+        elif client_ip == "10.0.0.4":
+            
+            print "modifica fluxos do no 4"
+            newpath = [4,5,1,2]
+            src = "00:00:00:00:00:04"
+            dst = "00:00:00:00:00:02"
+            self.modifica_fluxos(src, dst, newpath)
+
+            # oldpath = sw4 <-> sw3 <-> sw2
+            # newpath = sw4 <-> sw5 <-> sw1 <-> sw2
+
+        elif client_ip == "10.0.0.5":
+            
+            print "modifica fluxos do no 5"
+            newpath = [5,4,3,2]
+            src = "00:00:00:00:00:05"
+            dst = "00:00:00:00:00:02"
+            self.modifica_fluxos(src, dst, newpath)
+
+            # oldpath = sw5 <-> sw1 <-> sw2
+            # newpath = sw5 <-> sw4 <-> sw3 <-> sw2
 
         #print "\n \n RECALCULANDO ", newpath
 
@@ -251,6 +284,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         
     def modifica_fluxos(self, src, dst, newpath):
         indice = "%s-%s" % (src, dst)
+           
         in_port = self.fluxos_ativos[indice]['in_port']
         out_port = self.fluxos_ativos[indice]['out_port']
         oldpath = self.fluxos_ativos[indice]['path']
@@ -267,14 +301,18 @@ class SimpleSwitch13(app_manager.RyuApp):
                 next_sw = newpath[i+1]
                 action_out_port = self.net.edge[sw][next_sw]['sport']
             self.logger.info("==> add_flow sw=%s match_in_port=%s action_out_port=%s", sw, match_in_port, action_out_port)
+            datapath = self.net.node[sw]['conn']
+            parser = datapath.ofproto_parser
             match = parser.OFPMatch(in_port=match_in_port, 
                     eth_dst=dst, eth_src=src)
             actions = [parser.OFPActionOutput(action_out_port)]
-            self.add_flow(self.net.node[sw]['conn'], 1, match, actions)
+            self.add_flow(datapath, 1, match, actions)
         for sw in set(oldpath) - set(newpath):
             print "TODO: remover fluxos de %s" % (sw)
+            datapath = self.net.node[sw]['conn']
+            parser = datapath.ofproto_parser
             match = parser.OFPMatch(eth_dst=dst, eth_src=src)
-            self.remove_flow(self.net.node[sw]['conn'], match)
+            self.remove_flow(datapath, match)
         # TODO: Remover os fluxos da rota antiga cujos nos nao pertencam a rota nova!
 
 class SimpleSwitchWSGIApp(ControllerBase):

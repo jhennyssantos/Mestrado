@@ -23,26 +23,33 @@ def create_topology():
     s2 = net.addSwitch('s2')#, protocols='OpenFlow13')
     s3 = net.addSwitch('s3')#, protocols='OpenFlow13')
     s4 = net.addSwitch('s4')#, protocols='OpenFlow13')
+    s5 = net.addSwitch('s5')
+  
     
-    linkopts=dict(bw=50,  delay='5ms')#,   use_htb=True)#, loss=0,max_queue_size=100)
+    #linkopts=dict(bw=50,  delay='5ms')#,   use_htb=True)#, loss=0,max_queue_size=100)
     
     info( '*** Adding switch links\n' )
-    net.addLink(s1,s2, bw = INITIAL_BW)#, bw=50, delay='5ms')#,**linkopts)
-    net.addLink(s2,s3, bw = INITIAL_BW)#, bw=50, delay='5ms')#,**linkopts)
-    net.addLink(s3,s4, bw = INITIAL_BW)#, bw=50, delay='5ms')#,**linkopts)
-    net.addLink(s4,s1, bw = INITIAL_BW)#, bw=50, delay='5ms')#,**linkopts)
+    net.addLink(s1,s2, bw = INITIAL_BW)
+    net.addLink(s2,s3, bw = INITIAL_BW)
+    net.addLink(s3,s4, bw = INITIAL_BW)
+    net.addLink(s4,s5, bw = INITIAL_BW)
+    net.addLink(s5,s1, bw = INITIAL_BW)
     
     info( '*** Adding hosts\n' )
     h1 = net.addHost( 'h1', ip='10.0.0.1/24' )
     h2 = net.addHost( 'h2', ip='10.0.0.2/24' )
     h3 = net.addHost( 'h3', ip='10.0.0.3/24' )
     h4 = net.addHost( 'h4', ip='10.0.0.4/24' )
+    h5 = net.addHost( 'h5', ip='10.0.0.5/24' )
+
     
     info( '*** Adding host links\n' )
     net.addLink(s1,h1)#,**linkopts)
     net.addLink(s2,h2)#,**linkopts)
     net.addLink(s3,h3)#,**linkopts)
     net.addLink(s4,h4)#,**linkopts)
+    net.addLink(s5,h5)
+
 
     # Workaround parte 1 - para adicionar interface externa ao host h4
     net.addLink(s4,h4)
@@ -54,14 +61,23 @@ def create_topology():
     # Workaround parte 2 - para adicionar interface externa ao host h4
     s4.cmd("ovs-vsctl del-port s4 s4-eth4")
     s4.cmd("ifconfig s4-eth4 10.10.10.2/30 up") ## ip do hospedeiro / controlador
+    s4.cmd("route add -net 10.0.0.0/24 gw 10.10.10.1")
     h4.cmd("ifconfig h4-eth1 10.10.10.1/30 up") ## ip do h4
 
     # Workaround parte 3 - configurar o h4 como gateway da rede
     h4.cmd("sysctl net.ipv4.ip_forward=1")
-    h4.cmd("iptables -t nat -I POSTROUTING -o h4-eth1 -j MASQUERADE")
+    #h4.cmd("iptables -t nat -I POSTROUTING -o h4-eth1 -j MASQUERADE")
     h1.cmd("route add default gw 10.0.0.4")
+    h1.cmd("ping -c4 10.0.0.4 &")
     h2.cmd("route add default gw 10.0.0.4")
+    h2.cmd("ping -c4 10.0.0.4 &")
     h3.cmd("route add default gw 10.0.0.4")
+    h3.cmd("ping -c4 10.0.0.4 &")
+    h5.cmd("route add default gw 10.0.0.4")
+    h5.cmd("ping -c4 10.0.0.4 &")
+    #h6.cmd("route add default gw 10.0.0.4")
+    # h7.cmd("route add default gw 10.0.0.4")
+    # h8.cmd("route add default gw 10.0.0.4")
     
     #info( '*** Starting iperf3 servers on h2 and h4 and h6\n' )
     #h4.cmd("iperf3 -s -i 5 --logfile /tmp/saida-iperf-server-h4-%s.dat &" % (when))
