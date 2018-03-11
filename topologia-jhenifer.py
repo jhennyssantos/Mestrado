@@ -62,6 +62,16 @@ def create_topology():
     net.build()
     net.start()
 
+    # configura endereco do OVSDB para criacao de filas remotas (usamos s1, mas poderia ser em qq outro)
+    s1.cmd("ovs-vsctl set-manager ptcp:6632")
+    s1.cmd("ovs-vsctl set Bridge s1 protocols=OpenFlow13")
+    s2.cmd("ovs-vsctl set Bridge s2 protocols=OpenFlow13")
+    s3.cmd("ovs-vsctl set Bridge s3 protocols=OpenFlow13")
+    s4.cmd("ovs-vsctl set Bridge s4 protocols=OpenFlow13")
+    s5.cmd("ovs-vsctl set Bridge s5 protocols=OpenFlow13")
+    s6.cmd("ovs-vsctl set Bridge s6 protocols=OpenFlow13")
+
+
     # Workaround parte 2 - para adicionar interface externa ao host h4
     s4.cmd("ovs-vsctl del-port s4 s4-eth4")
     s4.cmd("ifconfig s4-eth4 10.10.10.2/30 up") ## ip do hospedeiro / controlador
