@@ -153,7 +153,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         dpid = datapath.id
         self.src = dpid
 
-       
+
         #aprender o endereco MAC para evitar FLOOD uma proxima vez
         self.mac_to_port.setdefault(dpid, {})
 
@@ -182,11 +182,12 @@ class SimpleSwitch13(app_manager.RyuApp):
             path = nx.shortest_path(self.net, dpid, dst_sw)
             self.oldpath = path
             self.dst = dst_sw
-            print "\n \n Jheni ", path
+            print "\n \n Caminho ", path
 
             self.logger.info("==> path(src=%s,dst=%s): %s", dpid, dst_sw, path)
             for i in range(len(path)-1,-1,-1):
                 sw = path[i]
+                
                 buff_id = None
                 if i == 0: # first switch
                     match_in_port = in_port
@@ -222,6 +223,13 @@ class SimpleSwitch13(app_manager.RyuApp):
                         buffer_id=ofproto.OFP_NO_BUFFER,
                         actions=actions, data=data)
                 datapath.send_msg(out)
+
+    def reservarecurso(self, client_ip, dpid):
+    	#if client_ip == "10.0.0.1":
+     	for switch in switch_list:
+     		if dpid == "00:00:00:00:00:03"
+     		
+     			actions = []
 
     def novarota(self, client_ip):
         #newpath = nx.shortest_path(self.net, self.src, self.dst)
@@ -330,7 +338,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             match = parser.OFPMatch(eth_dst=dst, eth_src=src)
             self.remove_flow(datapath, match)
         # TODO: Remover os fluxos da rota antiga cujos nos nao pertencam a rota nova!
-
+       	
 class SimpleSwitchWSGIApp(ControllerBase):
     def __init__(self, req, link, data, **config):
         super(SimpleSwitchWSGIApp, self).__init__(req, link, data, **config)
