@@ -153,7 +153,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         dpid = datapath.id
         self.src = dpid
 
-       
+
         #aprender o endereco MAC para evitar FLOOD uma proxima vez
         self.mac_to_port.setdefault(dpid, {})
 
@@ -257,7 +257,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         elif client_ip == "10.0.0.4":
             
             print "modifica fluxos do no 4"
-            newpath = [4,5,6,1,3]
+            newpath = [4,5,6,1,3,2]
             src = "00:00:00:00:00:04"
             dst = "00:00:00:00:00:02"
             self.modifica_fluxos(src, dst, newpath)

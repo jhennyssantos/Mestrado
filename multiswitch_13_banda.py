@@ -288,10 +288,11 @@ class SimpleSwitch13(app_manager.RyuApp):
         elif client_ip == "10.0.0.3":
             
             print "modifica fluxos do no 3"
-            newpath = [3,1,6,5,4,2]
+            curpath = [3,2]
+            output_ports = {3: "s3-eth2", 2: "s2-eth3"}
             src = "00:00:00:00:00:03"
             dst = "00:00:00:00:00:02"
-            self.modifica_fluxos(src, dst, newpath)
+            self.reservarecurso(src, dst, curpath, output_ports)
             
             # oldpath = sw3 <-> sw2
             # newpath = sw3 <-> sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
@@ -299,10 +300,11 @@ class SimpleSwitch13(app_manager.RyuApp):
         elif client_ip == "10.0.0.4":
             
             print "modifica fluxos do no 4"
-            newpath = [4,5,6,1,3]
+            curpath = [4,2]
+            output_ports = {4: "s4-eth1", 2: "s2-eth3"}
             src = "00:00:00:00:00:04"
             dst = "00:00:00:00:00:02"
-            self.modifica_fluxos(src, dst, newpath)
+            self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw4 <-> sw2
             # newpath = sw4 <-> sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
@@ -310,10 +312,11 @@ class SimpleSwitch13(app_manager.RyuApp):
         elif client_ip == "10.0.0.5":
             
             print "modifica fluxos do no 5"
-            newpath = [5,6,1,3,2]
+            curpath = [5,4,2]
+            output_ports = {5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
             src = "00:00:00:00:00:05"
             dst = "00:00:00:00:00:02"
-            self.modifica_fluxos(src, dst, newpath)
+            self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw5 <-> sw4 <-> sw2
             # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
@@ -322,10 +325,11 @@ class SimpleSwitch13(app_manager.RyuApp):
         elif client_ip == "10.0.0.6":
             
             print "modifica fluxos do no 6"
-            newpath = [6,1,3,2]
+            curpath = [6,5,4,2]
+            output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
             src = "00:00:00:00:00:06"
             dst = "00:00:00:00:00:02"
-            self.modifica_fluxos(src, dst, newpath)
+            self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw6 <-> sw5 <-> sw4 <-> sw2
             # newpath = sw6 <-> sw1 <-> sw3 <-> sw2 
