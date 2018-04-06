@@ -346,4 +346,4 @@ class SimpleSwitchWSGIApp(ControllerBase):
         if newqlt < oldqlt:
             self.myapp.novarota(remote_addr)
         body = json.dumps([])
-        return Response(content_type='application/json', body=body)
+        return Response(content_type='application/json', body=body, headerlist=[('Access-Control-Allow-Origin', '*')])
