@@ -16,4 +16,11 @@ sudo python gen-stats-from-samples.py -c 95 -i 1 -f 1 -s 0 -m 600 $(ls -1 rsbuff
 
 gnuplot
 load "nomedoarquivo.xxx"
+
+#Atualizar repositório no GIT
+
+git add <nome(s) do(s) arquivo(s)>
+git add *
+git commit -m "comentarios das alterações"
+git push origin master
  
