@@ -1,5 +1,19 @@
+# Clonar Projeto no GIT
+
 git clone https://github.com/jhennyssantos/Mestrado.git
 git add *
 git commit -m "Texto"
 git push origin
+
+
+# Script para converter os valores de tempo para 0-600, somar todos valores de buffer para determinado instante de tempo e tirar a media para cada segundo. --
+
+for cada in rsbufferlevel0*.dat; do awk '{if (NF<2) next; gsub(".[0-9]{3}Z$","",$1); segundo[$1] += $2 +  0.0; quantidade[$1] += 1} END { for (i in segundo) {print i,segundo[i]/quantidade[i]}}' $cada | sort -n | awk 'BEGIN {i=1} {print i,$2; i+=1}' > $cada-novo; done
+
+sudo python gen-stats-from-samples.py -c 95 -i 1 -f 1 -s 0 -m 600 $(ls -1 rsbufferlevel*-novo)
+
+#Gerar os gráficos GNUPLOT
+
+gnuplot
+load "nomedoarquivo.xxx"
  
