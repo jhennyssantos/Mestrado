@@ -10,7 +10,7 @@ from mininet.log import setLogLevel, info
 import os
 from time import strftime,localtime,sleep
 
-INITIAL_BW = 50
+INITIAL_BW = 6
 
 def create_topology():
     when = strftime("%Y-%m-%d_%H:%M:%S", localtime())
