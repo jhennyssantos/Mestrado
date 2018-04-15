@@ -1,0 +1,73 @@
+^C
+root@Mininet:/usr/bin# ^C
+root@Mininet:/usr/bin# ./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 2
+^C
+root@Mininet:/usr/bin# ./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 2
+^C
+root@Mininet:/usr/bin# ./ITGSend script_file -l[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[3Psudo nano script_file[D[D[D[D[D[2P -l[D[D[D_file
+[0;10m[39;49m[39;49m[0;10m[H[J[0;10;7m  GNU nano 2.2.6 [11bArquivo: script_file [30b [B[0;10m-a 10.0.0.2 -t 670000 -rp 10002 -T TCP -E 6250 -c 40[B-a 10.0.0.2 -t 670000 -rp 10002 -T TCP -E 192 -c 1300[B-a 10.0.0.2 -t 670000 -rp 10002 -T TCP -E 167 -c 1500[22;32H[0;10;7m[ 5 linhas lidas ][B^G[0;10m Obter Ajud[0;10;7m^O[0;10m Gravar    [0;10;7m^R[0;10m Ler o arq [0;10;7m^Y[0;10m Pág anter [0;10;7m^K[0;10m Recort txt[0;10;7m^C[0;10m Pos atual[B[0;10;7m^X[0;10m Sair[14G[0;10;7m^J[0;10m Justificar[0;10;7m^W[0;10m Onde está?[0;10;7m^V[0;10m Próx pág  [0;10;7m^U[0;10m Colar Txt [0;10;7m^T[0;10m VerfOrtog[3d-a 10.0.0.2 -t [1;69H[0;10;7mModificado[3;16H[0;10m[1P070000 -rp 10002 -T TCP -E 6250 -c 40[3;17H[B[1P00000 -rp 10002 -T TCP -E 192 -c 1300[4;18H[B[D[1P00000 -rp 10002 -T TCP -E 167 -c 1500[5;18H[22d[0;10;7mSalvar o buffer modificado (RESPONDER "Não" IRÁ DESTRUIR MODIFICAÇÕES) ? [6b  S[0;10m Sim[K[B[0;10;7m N[0;10m Não [14G   [0;10;7m^C[0;10m Cancelar[K[22;74H[0;10;7mNome do arquivo para gravar: script_file [31b[B^G[0;10m Obter Ajuda[21G[0;10;7mM-D[0;10m Formato DOS     [0;10;7mM-A[0;10m Anexar[23;61H[0;10;7mM-B[0;10m Arquivo reserva[B[0;10;7m^C[0;10m Cancelar [8b[0;10;7mM-M[0;10m Formato Mac     [0;10;7mM-P[0;10m Pré-anexar[22;41H[B[39;49m[0;10m[J[1;69H[0;10;7m [9b[22;29H[0;10m[1K [0;10;7m[ Escritas 5 linhas ][0;10m[K[24;80H[24;1Hroot@Mininet:/usr/bin# sudo nano script_file[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D[D./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 2
+Finished sending packets of flow ID: 1
+
+terminate called after throwing an instance of 'Runtime_error'
+Abortado (imagem do núcleo gravada)
+root@Mininet:/usr/bin# ./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 2
+Finished sending packets of flow ID: 1
+
+terminate called after throwing an instance of 'Runtime_error'
+Abortado (imagem do núcleo gravada)
+root@Mininet:/usr/bin# ^C
+root@Mininet:/usr/bin# ^C
+root@Mininet:/usr/bin# ./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 2
+Finished sending packets of flow ID: 1
+
+terminate called after throwing an instance of 'Runtime_error'
+terminate called recursively
+Abortado (imagem do núcleo gravada)
+root@Mininet:/usr/bin# ./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 2
+Finished sending packets of flow ID: 1
+
+terminate called after throwing an instance of 'Runtime_error'
+Abortado (imagem do núcleo gravada)
+root@Mininet:/usr/bin# ^C
+root@Mininet:/usr/bin# ^C
+root@Mininet:/usr/bin# ./ITGSend script_file -l
+ITGSend version 2.8.1 (r1023)
+Compile-time options: sctp dccp bursty multiport
+Started sending packets of flow ID: 1
+Started sending packets of flow ID: 3
+Started sending packets of flow ID: 2
+Finished sending packets of flow ID: 1
+
+terminate called after throwing an instance of 'Runtime_error'
+Abortado (imagem do núcleo gravada)
+root@Mininet:/usr/bin# 
