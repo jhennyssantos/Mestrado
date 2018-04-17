@@ -276,6 +276,16 @@ class SimpleSwitch13(app_manager.RyuApp):
             # oldpath = sw5 <-> sw4 <-> sw2
             # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
         
+        elif client_ip == "10.0.0.7":
+            
+            print "modifica fluxos do no 7"
+            newpath = [5,6,1,3,2]
+            src = "00:00:00:00:00:07"
+            dst = "00:00:00:00:00:02"
+            self.modifica_fluxos(src, dst, newpath)
+
+            # oldpath = sw5 <-> sw4 <-> sw2
+            # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
 
         elif client_ip == "10.0.0.6":
             

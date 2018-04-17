@@ -44,6 +44,7 @@ def create_topology():
     h4 = net.addHost( 'h4', ip='10.0.0.4/24' )
     h5 = net.addHost( 'h5', ip='10.0.0.5/24' )
     h6 = net.addHost( 'h6', ip='10.0.0.6/24' )
+    h7 = net.addHost( 'h7', ip='10.0.0.7/24' )
 
     
     info( '*** Adding host links\n' )
@@ -52,6 +53,7 @@ def create_topology():
     net.addLink(s3,h3)#,**linkopts)
     net.addLink(s4,h4)#,**linkopts)
     net.addLink(s5,h5)
+    net.addLink(s5,h7)
     net.addLink(s6,h6)
 
 
@@ -91,6 +93,8 @@ def create_topology():
     h5.cmd("ping -c4 10.0.0.4 &")
     h6.cmd("route add default gw 10.0.0.4")
     h6.cmd("ping -c4 10.0.0.4 &")
+    h7.cmd("route add default gw 10.0.0.4")
+    h7.cmd("ping -c4 10.0.0.4 &")
     #h6.cmd("route add default gw 10.0.0.4")
     # h7.cmd("route add default gw 10.0.0.4")
     # h8.cmd("route add default gw 10.0.0.4")
