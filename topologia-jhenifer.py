@@ -10,7 +10,7 @@ from mininet.log import setLogLevel, info
 import os
 from time import strftime,localtime,sleep
 
-INITIAL_BW = 10
+INITIAL_BW = 6
 
 def create_topology():
     when = strftime("%Y-%m-%d_%H:%M:%S", localtime())
@@ -25,6 +25,8 @@ def create_topology():
     s4 = net.addSwitch('s4', protocols='OpenFlow13')
     s5 = net.addSwitch('s5', protocols='OpenFlow13')
     s6 = net.addSwitch('s6', protocols='OpenFlow13')
+    s7 = net.addSwitch('s7', protocols='OpenFlow13')
+    s8 = net.addSwitch('s8', protocols='OpenFlow13')
   
     
     #linkopts=dict(bw=50,  delay='5ms')#,   use_htb=True)#, loss=0,max_queue_size=100)
@@ -35,7 +37,9 @@ def create_topology():
     net.addLink(s2,s4, bw = INITIAL_BW)
     net.addLink(s4,s5, bw = INITIAL_BW)
     net.addLink(s5,s6, bw = INITIAL_BW)
-    net.addLink(s6,s1, bw = INITIAL_BW)
+    net.addLink(s6,s7, bw = INITIAL_BW)
+    net.addLink(s7,s8, bw = INITIAL_BW)
+    net.addLink(s8,s1, bw = INITIAL_BW)
     
     info( '*** Adding hosts\n' )
     h1 = net.addHost( 'h1', ip='10.0.0.1/24' )
@@ -45,6 +49,7 @@ def create_topology():
     h5 = net.addHost( 'h5', ip='10.0.0.5/24' )
     h6 = net.addHost( 'h6', ip='10.0.0.6/24' )
     h7 = net.addHost( 'h7', ip='10.0.0.7/24' )
+    h8 = net.addHost( 'h8', ip='10.0.0.7/24' )
 
     
     info( '*** Adding host links\n' )
@@ -53,8 +58,9 @@ def create_topology():
     net.addLink(s3,h3)#,**linkopts)
     net.addLink(s4,h4)#,**linkopts)
     net.addLink(s5,h5)
-    net.addLink(s5,h7)
     net.addLink(s6,h6)
+    net.addLink(s7,h7)
+    net.addLink(s8,h8)
 
 
     # Workaround parte 1 - para adicionar interface externa ao host h4
@@ -72,6 +78,8 @@ def create_topology():
     s4.cmd("ovs-vsctl set Bridge s4 protocols=OpenFlow13")
     s5.cmd("ovs-vsctl set Bridge s5 protocols=OpenFlow13")
     s6.cmd("ovs-vsctl set Bridge s6 protocols=OpenFlow13")
+    s7.cmd("ovs-vsctl set Bridge s7 protocols=OpenFlow13")
+    s8.cmd("ovs-vsctl set Bridge s8 protocols=OpenFlow13")
 
 
     # Workaround parte 2 - para adicionar interface externa ao host h4
@@ -95,6 +103,8 @@ def create_topology():
     h6.cmd("ping -c4 10.0.0.4 &")
     h7.cmd("route add default gw 10.0.0.4")
     h7.cmd("ping -c4 10.0.0.4 &")
+    h8.cmd("route add default gw 10.0.0.4")
+    h8.cmd("ping -c4 10.0.0.4 &")
     #h6.cmd("route add default gw 10.0.0.4")
     # h7.cmd("route add default gw 10.0.0.4")
     # h8.cmd("route add default gw 10.0.0.4")
