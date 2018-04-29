@@ -27,15 +27,15 @@ set style line 3 lt 3 pt 4 ps 2 lw 2 lc rgb "blue"
 set style line 4 lt 4 pt 3 ps 2 lw 2 lc rgb "red"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
-set title "Seleção de Rotas - Largura de banda de 10MBits"
+set title "Seleção de Rotas - Largura de banda de 10MBits - 12 nós"
 set xlabel "Tempo (ms)"
 set ylabel "Ocupação do Buffer (s)"
-set xtics 500
+set xtics 250
 set ytics 5
 
 #set key t r
 
-set xrange [0:1200]
+set xrange [0:1000]
 set yrange [0:50]
 #urban_pdr.dat
 #urban_pdr.dat
