@@ -1,3 +1,11 @@
+#Rodar Controlador 
+
+ryu-manager multiswitch_13_8sw.py --observe-links
+
+# Rodar topologia
+
+sudo python topologia-jhenifer.py
+
 # Clonar Projeto no GIT
 
 git clone https://github.com/jhennyssantos/Mestrado.git
