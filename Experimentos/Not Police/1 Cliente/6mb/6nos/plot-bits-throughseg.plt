@@ -11,7 +11,7 @@
 set terminal postscript eps color "Times" 20
 set encoding utf8
 set termoption enhanced
-set output 'urbanrtt.eps'
+set output 'throughseg.eps'
 
 set grid ytics lt 0 lw 1 lc rgb "#cccccc"
 set grid xtics lt 0 lw 1 lc rgb "#cccccc"
