@@ -6,7 +6,6 @@ from optparse import OptionParser
 
 def ci(data, confidence=0.95):
     std = np.std(data)
-
     return t.ppf((1+confidence)/2., len(data) - 1)*std/np.sqrt(len(data))
 
 parser = OptionParser()
