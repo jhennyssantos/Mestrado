@@ -1,0 +1,11 @@
+1.	O que é um perfil?
+O perfil relaciona um usuário a um conjunto de permissões necessárias para execução de suas atividades diárias em um determinado sistema. A criação de um usuário e a vinculação ao perfil é de responsabilidade do NTI. Enquanto que a revisão periódica dos usuários atrelados aos perfis é de responsabilidade dos gestores das áreas. 
+2.	Perfis de acesso por sistema
+Cada sistema possui um conjunto de perfis e cada perfil possui um conjunto de permissões. A seguir será listado os perfis e suas respectivas permissões, separados por sistema.
+
+Um sistema para a inscrição em cursos e eventos da instity
+
+
+Assitência técnica condenou os três monitores, os tombos 35513, 22416 e 24862 serão descartados.
+
+CARGO/PERFIS	Administrador	Inventariador	Patrimônio	Consulta	Transferência
