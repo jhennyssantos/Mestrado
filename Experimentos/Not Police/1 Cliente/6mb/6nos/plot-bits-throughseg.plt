@@ -43,6 +43,6 @@ set yrange [0:4000]
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "mediathroughseg.dat" using 1:2  title "Largura de banda" with lines ls 1,\
-"mediathroughsegbitrate.dat" using 1:2 title "Taxa de bits" with lines ls 2,\
+plot "plotthroughsegbitrate.dat" using 1:2:3  title "Largura de banda" with lines ls 1,\
+"plotthroughseg.dat" using 1:2:3 title "Taxa de bits" with points ls 2,\
 #1 / 0 notitle  smooth csplines with lines ls 1

@@ -1,7 +1,7 @@
 %!PS-Adobe-2.0 EPSF-2.0
 %%Title: throughseg.eps
-%%Creator: gnuplot 5.0 patchlevel 7
-%%CreationDate: Tue Nov 06 15:28:57 2018
+%%Creator: gnuplot 4.6 patchlevel 4
+%%CreationDate: Sun Nov  4 21:12:24 2018
 %%DocumentFonts: (atend)
 %%BoundingBox: 50 50 410 302
 %%EndComments
@@ -18,7 +18,6 @@ gnudict begin
 /Dashlength 1 def
 /Landscape false def
 /Level1 false def
-/Level3 false def
 /Rounded false def
 /ClipToBoundingBox false def
 /SuppressPDFMark false def
@@ -30,11 +29,11 @@ gnudict begin
 %
 /vshift -66 def
 /dl1 {
-  10.0 Dashlength userlinewidth gnulinewidth div mul mul mul
+  10.0 Dashlength mul mul
   Rounded { currentlinewidth 0.75 mul sub dup 0 le { pop 0.01 } if } if
 } def
 /dl2 {
-  10.0 Dashlength userlinewidth gnulinewidth div mul mul mul
+  10.0 Dashlength mul mul
   Rounded { currentlinewidth 0.75 mul add } if
 } def
 /hpt_ 31.5 def
@@ -48,7 +47,7 @@ gnudict begin
   } if
 } def
 %
-% Gnuplot Prolog Version 5.1 (Oct 2015)
+% Gnuplot Prolog Version 4.6 (September 2012)
 %
 %/SuppressPDFMark true def
 %
@@ -65,11 +64,11 @@ gnudict begin
 /vpt2 vpt 2 mul def
 /hpt2 hpt 2 mul def
 /Lshow {currentpoint stroke M 0 vshift R 
-	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
 /Rshow {currentpoint stroke M dup stringwidth pop neg vshift R
-	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
 /Cshow {currentpoint stroke M dup stringwidth pop -2 div vshift R 
-	Blacktext {gsave 0 setgray textshow grestore} {textshow} ifelse} def
+	Blacktext {gsave 0 setgray show grestore} {show} ifelse} def
 /UP {dup vpt_ mul /vpt exch def hpt_ mul /hpt exch def
   /hpt2 hpt 2 mul def /vpt2 vpt 2 mul def} def
 /DL {Color {setrgbcolor Solid {pop []} if 0 setdash}
@@ -83,7 +82,7 @@ gnudict begin
 /PL {stroke userlinewidth setlinewidth
 	Rounded {1 setlinejoin 1 setlinecap} if} def
 3.8 setmiterlimit
-% Classic Line colors (version 5.0)
+% Default Line colors
 /LCw {1 1 1} def
 /LCb {0 0 0} def
 /LCa {0 0 0} def
@@ -96,21 +95,19 @@ gnudict begin
 /LC6 {0 0 0} def
 /LC7 {1 0.3 0} def
 /LC8 {0.5 0.5 0.5} def
-% Default dash patterns (version 5.0)
-/LTB {BL [] LCb DL} def
+% Default Line Types
 /LTw {PL [] 1 setgray} def
-/LTb {PL [] LCb DL} def
+/LTb {BL [] LCb DL} def
 /LTa {AL [1 udl mul 2 udl mul] 0 setdash LCa setrgbcolor} def
 /LT0 {PL [] LC0 DL} def
-/LT1 {PL [2 dl1 3 dl2] LC1 DL} def
-/LT2 {PL [1 dl1 1.5 dl2] LC2 DL} def
-/LT3 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC3 DL} def
-/LT4 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
-/LT5 {PL [4 dl1 2 dl2] LC5 DL} def
-/LT6 {PL [1.5 dl1 1.5 dl2 1.5 dl1 1.5 dl2 1.5 dl1 6 dl2] LC6 DL} def
-/LT7 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC7 DL} def
-/LT8 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC8 DL} def
-/SL {[] 0 setdash} def
+/LT1 {PL [4 dl1 2 dl2] LC1 DL} def
+/LT2 {PL [2 dl1 3 dl2] LC2 DL} def
+/LT3 {PL [1 dl1 1.5 dl2] LC3 DL} def
+/LT4 {PL [6 dl1 2 dl2 1 dl1 2 dl2] LC4 DL} def
+/LT5 {PL [3 dl1 3 dl2 1 dl1 3 dl2] LC5 DL} def
+/LT6 {PL [2 dl1 2 dl2 2 dl1 6 dl2] LC6 DL} def
+/LT7 {PL [1 dl1 2 dl2 6 dl1 2 dl2 1 dl1 2 dl2] LC7 DL} def
+/LT8 {PL [2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 2 dl2 2 dl1 4 dl2] LC8 DL} def
 /Pnt {stroke [] 0 setdash gsave 1 setlinecap M 0 0 V stroke grestore} def
 /Dia {stroke [] 0 setdash 2 copy vpt add M
   hpt neg vpt neg V hpt vpt neg V
@@ -332,14 +329,9 @@ gnudict begin
 %
 /languagelevel where
  {pop languagelevel} {1} ifelse
-dup 2 lt
-	{/InterpretLevel1 true def
-	 /InterpretLevel3 false def}
-	{/InterpretLevel1 Level1 def
-	 2 gt
-	    {/InterpretLevel3 Level3 def}
-	    {/InterpretLevel3 false def}
-	 ifelse }
+ 2 lt
+	{/InterpretLevel1 true def}
+	{/InterpretLevel1 Level1 def}
  ifelse
 %
 % PostScript level 2 pattern fill definitions
@@ -429,7 +421,6 @@ Level1 {Level1PatternFill} {Level2PatternFill} ifelse
 dup length dict begin {1 index /FID eq {pop pop} {def} ifelse} forall
 currentdict end definefont pop
 %
-%
 % Base ISO8859-1 character encoding plus support macros for UTF-8 encoding
 % via the glyphshow operator
 %
@@ -492,11 +483,11 @@ currentdict end definefont
      { 5 get 3 eq {gsave} {grestore} ifelse }
      {dup dup 0 get findfont exch 1 get scalefont setfont
      [ currentpoint ] exch dup 2 get 0 exch R dup 5 get 2 ne {dup dup 6
-     get exch 4 get {textshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
+     get exch 4 get {Gshow} {stringwidth pop 0 R} ifelse }if dup 5 get 0 eq
      {dup 3 get {2 get neg 0 exch R pop} {pop aload pop M} ifelse} {dup 5
      get 1 eq {dup 2 get exch dup 3 get exch 6 get stringwidth pop -2 div
      dup 0 R} {dup 6 get stringwidth pop -2 div 0 R 6 get
-     textshow 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
+     show 2 index {aload pop M neg 3 -1 roll neg R pop pop} {pop pop pop
      pop aload pop M} ifelse }ifelse }ifelse }
      ifelse }
    forall} def
@@ -525,41 +516,14 @@ systemdict /pdfmark known not {
 SDict begin [
   /Title (throughseg.eps)
   /Subject (gnuplot plot)
-  /Creator (gnuplot 5.0 patchlevel 7)
+  /Creator (gnuplot 4.6 patchlevel 4)
+  /Author (mininet)
 %  /Producer (gnuplot)
 %  /Keywords ()
-  /CreationDate (Tue Nov 06 15:28:57 2018)
+  /CreationDate (Sun Nov  4 21:12:24 2018)
   /DOCINFO pdfmark
 end
 } ifelse
-%
-% Support for boxed text - Ethan A Merritt May 2005
-%
-/InitTextBox { userdict /TBy2 3 -1 roll put userdict /TBx2 3 -1 roll put
-           userdict /TBy1 3 -1 roll put userdict /TBx1 3 -1 roll put
-	   /Boxing true def } def
-/ExtendTextBox { Boxing
-    { gsave dup false charpath pathbbox
-      dup TBy2 gt {userdict /TBy2 3 -1 roll put} {pop} ifelse
-      dup TBx2 gt {userdict /TBx2 3 -1 roll put} {pop} ifelse
-      dup TBy1 lt {userdict /TBy1 3 -1 roll put} {pop} ifelse
-      dup TBx1 lt {userdict /TBx1 3 -1 roll put} {pop} ifelse
-      grestore } if } def
-/PopTextBox { newpath TBx1 TBxmargin sub TBy1 TBymargin sub M
-               TBx1 TBxmargin sub TBy2 TBymargin add L
-	       TBx2 TBxmargin add TBy2 TBymargin add L
-	       TBx2 TBxmargin add TBy1 TBymargin sub L closepath } def
-/DrawTextBox { PopTextBox stroke /Boxing false def} def
-/FillTextBox { gsave PopTextBox 1 1 1 setrgbcolor fill grestore /Boxing false def} def
-0 0 0 0 InitTextBox
-/TBxmargin 20 def
-/TBymargin 20 def
-/Boxing false def
-/textshow { ExtendTextBox Gshow } def
-%
-% redundant definitions for compatibility with prologue.ps older than 5.0.2
-/LTB {BL [] LCb DL} def
-/LTb {PL [] LCb DL} def
 end
 %%EndProlog
 %%Page: 1 1
@@ -613,17 +577,17 @@ LTb
 LCb setrgbcolor
 1.000 UL
 LTa
-0.80 0.80 0.80 C 1100 2539 M
+0.80 0.80 0.80 C 1100 2540 M
 5739 0 V
 stroke
 LTb
 LCb setrgbcolor
-1100 2539 M
+1100 2540 M
 63 0 V
 5676 0 R
 -63 0 V
 stroke
-980 2539 M
+980 2540 M
 [ [(Times) 200.0 0.0 true true 0 ( 2000)]
 ] -66.7 MRshow
 1.000 UL
@@ -742,7 +706,7 @@ stroke
 LTb
 LCb setrgbcolor
 1.000 UL
-LTB
+LTb
 LCb setrgbcolor
 1100 4439 N
 0 -3799 V
@@ -750,10 +714,6 @@ LCb setrgbcolor
 0 3799 V
 -5739 0 V
 Z stroke
-1.000 UP
-1.000 UL
-LTb
-LCb setrgbcolor
 LCb setrgbcolor
 160 2539 M
 currentpoint gsave translate -270 rotate 0 0 moveto
@@ -766,23 +726,499 @@ LCb setrgbcolor
 [ [(Times) 200.0 0.0 true true 0 (Tempo \(s\))]
 ] -66.7 MCshow
 LTb
-LCb setrgbcolor
 3969 4739 M
 [ [(Times) 200.0 0.0 true true 0 (Melhor Esforço - Largura de banda de 6MBits)]
 ] -66.7 MCshow
-% Begin plot #1
-2.000 UL
-LTb
-1.00 0.00 0.00 C % End plot #1
-% Begin plot #2
+1.000 UP
 1.000 UL
-LTb
-0.00 1.00 0.00 C % End plot #2
-2.000 UL
 LTb
 LCb setrgbcolor
+% Begin plot #1
+2.000 UL
+LT0
+1.00 0.00 0.00 C LCb setrgbcolor
+5936 4276 M
+[ [(Times) 200.0 0.0 true true 0 (Largura de banda)]
+] -66.7 MRshow
+LT0
+1.00 0.00 0.00 C 6056 4276 M
+543 0 V
+1100 1634 M
+16 0 V
+16 0 V
+16 0 V
+16 0 V
+15 0 V
+16 86 V
+16 686 V
+16 86 V
+16 185 V
+16 553 V
+16 185 V
+16 -86 V
+16 738 V
+16 0 V
+15 270 V
+16 -270 V
+16 -270 V
+16 -271 V
+16 0 V
+16 -270 V
+16 86 V
+16 356 V
+16 -270 V
+16 0 V
+15 -86 V
+16 -86 V
+16 -270 V
+16 -541 V
+16 -540 V
+16 540 V
+16 -184 V
+16 85 V
+16 -366 V
+16 637 V
+15 -182 V
+16 -187 V
+16 174 V
+16 268 V
+16 272 V
+16 182 V
+16 -439 V
+16 637 V
+16 -1263 V
+15 267 V
+16 -366 V
+16 366 V
+16 -267 V
+16 636 V
+16 -907 V
+16 538 V
+16 -10 V
+16 96 V
+16 -551 V
+15 822 V
+16 88 V
+16 96 V
+16 -538 V
+16 -88 V
+16 -11 V
+16 637 V
+16 -551 V
+16 637 V
+16 -637 V
+15 195 V
+16 -182 V
+16 96 V
+16 -281 V
+16 281 V
+16 -281 V
+16 182 V
+16 -10 V
+16 96 V
+16 -366 V
+15 551 V
+16 -182 V
+16 452 V
+16 -366 V
+16 194 V
+16 -280 V
+16 -89 V
+16 -366 V
+16 808 V
+15 -452 V
+16 281 V
+16 88 V
+16 -174 V
+16 -452 V
+16 96 V
+16 -11 V
+16 97 V
+16 -11 V
+16 11 V
+15 174 V
+16 -89 V
+16 -10 V
+16 96 V
+16 -10 V
+16 564 V
+16 -380 V
+16 367 V
+16 -182 V
+16 -88 V
+stroke 2722 2703 M
+15 -86 V
+16 -453 V
+16 1079 V
+16 -722 V
+16 551 V
+16 -551 V
+16 10 V
+16 -182 V
+16 366 V
+16 -280 V
+15 182 V
+16 -367 V
+16 637 V
+16 -10 V
+16 366 V
+16 -452 V
+16 10 V
+16 -280 V
+16 96 V
+15 -453 V
+16 11 V
+16 -96 V
+16 -89 V
+16 -96 V
+16 268 V
+16 -11 V
+16 736 V
+16 -551 V
+16 -174 V
+15 629 V
+16 -629 V
+16 88 V
+16 367 V
+16 88 V
+16 -715 V
+16 -96 V
+16 367 V
+16 -281 V
+16 -75 V
+15 -11 V
+16 367 V
+16 -110 V
+16 97 V
+16 174 V
+16 182 V
+16 273 V
+16 96 V
+16 -367 V
+16 -358 V
+15 457 V
+16 0 V
+16 -174 V
+16 88 V
+16 453 V
+16 -637 V
+16 96 V
+16 -96 V
+16 -174 V
+15 161 V
+16 10 V
+16 -195 V
+16 736 V
+16 -452 V
+16 465 V
+16 -637 V
+16 -273 V
+16 -182 V
+16 -88 V
+15 -96 V
+16 184 V
+16 723 V
+16 -822 V
+16 182 V
+16 3 V
+16 452 V
+16 -465 V
+16 195 V
+16 2 V
+15 354 V
+16 187 V
+16 -187 V
+16 174 V
+16 11 V
+16 358 V
+16 195 V
+16 -637 V
+16 -174 V
+16 -366 V
+15 96 V
+16 -11 V
+16 -88 V
+16 -96 V
+16 86 V
+16 267 V
+16 102 V
+16 452 V
+16 -637 V
+16 281 V
+15 260 V
+16 96 V
+16 -10 V
+16 280 V
+16 -722 V
+16 637 V
+stroke 4375 3072 M
+16 -908 V
+16 551 V
+16 -280 V
+15 452 V
+16 -551 V
+16 281 V
+16 345 V
+16 -75 V
+16 -96 V
+16 10 V
+16 89 V
+16 -175 V
+16 -366 V
+15 96 V
+16 -551 V
+16 281 V
+16 -96 V
+16 182 V
+16 -11 V
+16 96 V
+16 175 V
+16 267 V
+16 -452 V
+15 367 V
+16 259 V
+16 -75 V
+16 88 V
+16 11 V
+16 -907 V
+16 96 V
+16 -11 V
+16 -88 V
+16 88 V
+15 268 V
+16 -268 V
+16 182 V
+16 89 V
+16 182 V
+16 -281 V
+16 367 V
+16 -182 V
+16 267 V
+15 3 V
+16 10 V
+16 -96 V
+16 -88 V
+16 88 V
+16 637 V
+16 -465 V
+16 -174 V
+16 2 V
+16 -174 V
+15 88 V
+16 356 V
+16 11 V
+16 -907 V
+16 -174 V
+16 444 V
+16 96 V
+16 346 V
+16 -985 V
+16 -96 V
+15 465 V
+16 -195 V
+16 96 V
+16 88 V
+16 -88 V
+16 -268 V
+16 440 V
+16 174 V
+16 1006 V
+16 -907 V
+15 551 V
+16 -367 V
+16 281 V
+16 -281 V
+16 367 V
+16 -551 V
+16 551 V
+16 -182 V
+16 182 V
+15 -908 V
+16 97 V
+16 260 V
+16 -175 V
+16 -96 V
+16 637 V
+16 -182 V
+16 -444 V
+16 -182 V
+16 366 V
+15 -637 V
+16 182 V
+16 260 V
+16 -88 V
+16 88 V
+16 182 V
+16 -637 V
+16 367 V
+16 2 V
+16 182 V
+15 175 V
+16 366 V
+16 -182 V
+stroke 6028 2705 M
+16 281 V
+16 -24 V
+16 182 V
+16 -267 V
+16 280 V
+16 -267 V
+16 182 V
+15 -1264 V
+16 993 V
+16 -1263 V
+16 452 V
+16 -452 V
+16 367 V
+16 -281 V
+16 637 V
+16 75 V
+15 268 V
+16 -281 V
+16 452 V
+16 -353 V
+16 1006 V
+16 -453 V
+16 281 V
+16 -96 V
+16 96 V
+16 -821 V
+15 96 V
+16 -465 V
+16 821 V
+16 -281 V
+16 736 V
+16 -637 V
+16 -174 V
+16 -637 V
+16 907 V
+16 -366 V
+15 96 V
+16 -182 V
+16 723 V
+16 -908 V
+16 539 V
+16 -367 V
+16 551 V
+16 -723 V
+16 268 V
+16 -10 V
+15 270 V
+16 11 V
+16 457 V
+16 -174 V
+16 -466 V
+% End plot #1
+% Begin plot #2
+1.000 UP
+stroke
 1.000 UL
-LTB
+LT1
+0.00 1.00 0.00 C LCb setrgbcolor
+5936 4076 M
+[ [(Times) 200.0 0.0 true true 0 (Taxa de bits)]
+] -66.7 MRshow
+LT1
+0.00 1.00 0.00 C 1164 4065 Crs
+1211 3672 Crs
+1243 4188 Crs
+1434 4199 Crs
+1466 4085 Crs
+1482 3683 Crs
+1593 4148 Crs
+1641 4307 Crs
+1688 4387 Crs
+1784 4353 Crs
+1847 4375 Crs
+1879 3976 Crs
+1943 4180 Crs
+1974 3960 Crs
+2102 4360 Crs
+2117 4212 Crs
+2165 4023 Crs
+2213 4407 Crs
+2229 4112 Crs
+2261 4394 Crs
+2356 4083 Crs
+2467 4296 Crs
+2515 4335 Crs
+2674 4364 Crs
+2706 4375 Crs
+2833 4269 Crs
+2881 4020 Crs
+2896 4054 Crs
+2992 4107 Crs
+3008 4434 Crs
+3326 4303 Crs
+3421 4336 Crs
+3469 4216 Crs
+3485 3764 Crs
+3532 4277 Crs
+3548 4305 Crs
+3628 3878 Crs
+3644 4254 Crs
+3723 3963 Crs
+3755 4032 Crs
+3787 4436 Crs
+3866 4151 Crs
+3962 4250 Crs
+3993 4224 Crs
+4057 4142 Crs
+4089 4346 Crs
+4152 3830 Crs
+4200 4250 Crs
+4264 4130 Crs
+4295 4306 Crs
+4327 4060 Crs
+4423 4202 Crs
+4454 4333 Crs
+4502 4176 Crs
+4518 4403 Crs
+4756 4235 Crs
+4804 3841 Crs
+4836 4153 Crs
+4931 4376 Crs
+5011 4211 Crs
+5027 4285 Crs
+5074 4170 Crs
+5090 4272 Crs
+5170 3684 Crs
+5186 4257 Crs
+5217 3965 Crs
+5233 4009 Crs
+5313 3814 Crs
+5329 4430 Crs
+5361 4360 Crs
+5392 4240 Crs
+5456 3690 Crs
+5551 4323 Crs
+5678 4224 Crs
+5710 4385 Crs
+5726 4305 Crs
+5742 4394 Crs
+5790 4220 Crs
+5885 4347 Crs
+5901 4351 Crs
+6012 4095 Crs
+6060 4298 Crs
+6155 4355 Crs
+6187 4336 Crs
+6219 4259 Crs
+6283 3915 Crs
+6314 4310 Crs
+6378 4414 Crs
+6473 4406 Crs
+6489 4420 Crs
+6521 4321 Crs
+6601 4320 Crs
+6648 4261 Crs
+6712 4019 Crs
+6791 4188 Crs
+6807 4275 Crs
+6327 4076 Crs
+% End plot #2
+1.000 UL
+LTb
 LCb setrgbcolor
 1100 4439 N
 0 -3799 V
@@ -798,7 +1234,5 @@ stroke
 grestore
 end
 showpage
-%%Trailer
-%%DocumentFonts: Times
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     %%Trailer
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 %%Trailer
 %%DocumentFonts: Times
