@@ -31,12 +31,12 @@ set notitle
 set xlabel "Tempo (s)"
 set ylabel "Jitter (ms)"
 set xtics 200
-set ytics 200
+set ytics 0.05
 
 #set key t r
 
 set xrange [0:600]
-set yrange [0:1000]
+set yrange [0:0.25]
 #urban_pdr.dat
 #urban_pdr.dat
 #plot "plotbufferlevel.dat" using 1:2:4:5  title "Ocupação do Buffer" with linespoints ls 1,\

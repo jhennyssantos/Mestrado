@@ -11,7 +11,7 @@
 set terminal postscript eps color "Times" 20
 set encoding utf8
 set termoption enhanced
-set output 'urbanrtt.eps'
+set output 'bufferlevel.eps'
 
 set grid ytics lt 0 lw 1 lc rgb "#cccccc"
 set grid xtics lt 0 lw 1 lc rgb "#cccccc"
@@ -35,16 +35,16 @@ set ytics 5
 #set key t r
 
 set xrange [0:600]
-set yrange [0:40]
+set yrange [0:20]
 #urban_pdr.dat
 #urban_pdr.dat
 #plot "plotbufferlevel.dat" using 1:2:4:5  title "Ocupação do Buffer" with linespoints ls 1,\
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "src1mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 1" with lines ls 1,\
-\
-"src2mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 2" with lines ls 2,\
-\
-"src3mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 3" with lines ls 3,\
+plot "plotbufferlevel.dat" using 1:3:4  notitle with lines ls 1,\
+#\
+#"src2mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 2" with lines ls 2,\
+#\
+#"src3mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 3" with lines ls 3,\
 #1 / 0 notitle  smooth csplines with lines ls 1

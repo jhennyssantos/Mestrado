@@ -22,14 +22,14 @@ set grid xtics lt 0 lw 1 lc rgb "#cccccc"
 #set style line 5 lt 5  pt 7 ps 2 lw 2 lc rgb "black"
 
 set style line 1 lw 2 lc rgb "red"
-set style line 2 lt 2 pt 9 ps 2 lw 2 lc rgb "black"
+set style line 2 lt 1 pt 9 ps 2 lw 2 lc rgb "black"
 set style line 3 lt 3 pt 4 ps 2 lw 2 lc rgb "blue"
 set style line 4 lt 4 pt 3 ps 2 lw 2 lc rgb "red"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
 set notitle
 set xlabel "Tempo (s)"
-set ylabel "Delay (ms)"
+set ylabel "Delay (s)"
 set xtics 200
 set ytics 0.05
 
@@ -43,6 +43,6 @@ set yrange [0:0.25]
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotdelay.dat" using 1:3:4  notitle with lines ls 1,\
-#"plotjitter.dat" using 1:3:4 title "Jitter" with linespoints ls 3,\
+plot "plotdelay.dat" using 1:3:4  title "delay" with lines ls 1,\
+"plotjitter.dat" using 1:3:4 title "Jitter" with lines ls 2,\
 #1 / 0 notitle  smooth csplines with lines ls 1
