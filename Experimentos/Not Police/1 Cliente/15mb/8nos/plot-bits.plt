@@ -26,7 +26,7 @@ set style line 2 lt 1 lw 2 lc rgb "blue"
 set style line 3 lt 1 pt 7 ps 2 lw 2 lc rgb "black"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
-set title "Melhor Esforço - Largura de banda de 10MBits"
+set title "Melhor Esforço - Largura de banda de 15MBits"
 set xlabel "Tempo (s)"
 set ylabel "Ocupação do Buffer (s)"
 set xtics 100
