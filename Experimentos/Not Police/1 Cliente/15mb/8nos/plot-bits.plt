@@ -29,20 +29,20 @@ set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 set title "Melhor Esforço - Largura de banda de 10MBits"
 set xlabel "Tempo (s)"
 set ylabel "Ocupação do Buffer (s)"
-set xtics 200
+set xtics 600
 set ytics 5
 
 #set key t r
 
 set xrange [0:600]
-set yrange [0:20]
+set yrange [0:40]
 #urban_pdr.dat
 #urban_pdr.dat
 #plot "plotbufferlevel.dat" using 1:2:4:5  title "Ocupação do Buffer" with linespoints ls 1,\
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotbufferlevel.dat" using 1:3:4  notitle with lines ls 1,\
+plot "plotmediabufferlevel.dat" using 1:3:4  notitle with lines ls 1,\
 #\
 #"src2mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 2" with lines ls 2,\
 #\
