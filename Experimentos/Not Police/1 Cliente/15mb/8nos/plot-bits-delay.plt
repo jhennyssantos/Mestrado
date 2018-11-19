@@ -30,7 +30,7 @@ set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 set notitle
 set xlabel "Tempo (s)"
 set ylabel "Delay (s)"
-set xtics 200
+set xtics 100
 set ytics 0.05
 
 #set key t r
@@ -43,6 +43,6 @@ set yrange [0:0.25]
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotdelay.dat" using 1:3:4  title "delay" with lines ls 1,\
-"plotjitter.dat" using 1:3:4 title "Jitter" with lines ls 2,\
+plot "plotmediadelay.dat" using 1:3:4  title "Latência" with lines ls 1,\
+"plotmediajitter.dat" using 1:3:4 title "Jitter" with lines ls 2,\
 #1 / 0 notitle  smooth csplines with lines ls 1
