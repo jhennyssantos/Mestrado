@@ -23,7 +23,7 @@ set grid xtics lt 0 lw 1 lc rgb "#cccccc"
 
 set style line 1 lw 2 lc rgb "red"
 set style line 2 lt 1 lw 2 lc rgb "blue"
-set style line 3 lt 1 pt 7 ps 2 lw 2 lc rgb "black"
+set style line 3 lt 1 pt 7 ps 2 lw 2 lc rgb "green"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
 set title "Melhor Esforço - Largura de banda de 10MBits"
