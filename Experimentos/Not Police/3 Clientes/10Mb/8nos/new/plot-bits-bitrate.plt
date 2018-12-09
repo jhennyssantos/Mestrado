@@ -43,6 +43,6 @@ set yrange [0:700]
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotbitrate.dat" using 1:3:4  notitle with lines ls 1,\
+plot "plotmediabitrate.dat" using 1:3:4  notitle with lines ls 1,\
 #"plotbufferlevel.dat" using 1:2 notitle ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1

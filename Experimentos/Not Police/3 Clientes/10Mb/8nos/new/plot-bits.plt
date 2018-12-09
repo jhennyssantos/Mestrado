@@ -42,9 +42,9 @@ set yrange [0:20]
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "src1mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 1" with lines ls 1,\
+plot "plotmediasrc1bufferlevel.dat" using 1:3:4  title "Cliente 1" with lines ls 1,\
 \
-"src2mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 2" with lines ls 2,\
+"plotmediasrc2bufferlevel.dat" using 1:3:4  title "Cliente 2" with lines ls 2,\
 \
-"src3mediaplotbufferlevel.dat" using 1:3:4  title "Cliente 3" with lines ls 3,\
+"plotmediasrc3bufferlevel.dat" using 1:3:4  title "Cliente 3" with lines ls 3,\
 #1 / 0 notitle  smooth csplines with lines ls 1

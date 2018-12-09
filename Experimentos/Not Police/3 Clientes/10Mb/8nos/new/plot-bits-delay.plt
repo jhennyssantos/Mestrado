@@ -43,6 +43,6 @@ set yrange [0:0.15]
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotdelay.dat" using 1:3:4  title "Latência" with lines ls 1,\
-"plotjitter.dat" using 1:3:4 title "Jitter" with lines ls 3,\
+plot "plotmediadelay.dat" using 1:3:4  title "Latência" with lines ls 1,\
+"plotmediajitter.dat" using 1:3:4 title "Jitter" with lines ls 3,\
 #1 / 0 notitle  smooth csplines with lines ls 1
