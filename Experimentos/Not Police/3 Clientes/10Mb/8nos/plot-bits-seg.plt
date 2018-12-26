@@ -27,6 +27,7 @@ set style line 3 lt 1 pt 7 ps 2 lw 2 lc rgb "green"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
 #set title "Melhor Esforço - Largura de banda de 10MBits"
+#set title "Melhor Esforço - Largura de banda de 10MBits"
 set xlabel "Tempo (s)"
 set ylabel "Taxa de Bits (kbps)"
 set xtics 100
