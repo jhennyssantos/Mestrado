@@ -35,7 +35,7 @@ set ytics 1000
 #set key t r
 
 set xrange [0:300]
-set yrange [0:4000]
+set yrange [0:5000]
 #urban_pdr.dat
 #urban_pdr.dat
 #plot "plotbufferlevel.dat" using 1:2:4:5  title "Ocupação do Buffer" with linespoints ls 1,\
