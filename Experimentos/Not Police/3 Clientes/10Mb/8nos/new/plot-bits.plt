@@ -26,10 +26,10 @@ set style line 2 lt 1 lw 2 lc rgb "blue"
 set style line 3 lt 1 pt 7 ps 2 lw 2 lc rgb "green"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
-set title "Seleção de Rotas - Largura de banda de 10MBits"
+set title "Melhor Esforço - Largura de banda de 10MBits"
 set xlabel "Tempo (s)"
 set ylabel "Ocupação do Buffer (s)"
-set xtics 100
+set xtics 200
 set ytics 5
 
 #set key t r

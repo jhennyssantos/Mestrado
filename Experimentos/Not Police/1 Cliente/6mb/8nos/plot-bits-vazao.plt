@@ -11,7 +11,7 @@
 set terminal postscript eps color "Times" 20
 set encoding utf8
 set termoption enhanced
-set output 'urbanrtt.eps'
+set output 'througseg.eps'
 
 set grid ytics lt 0 lw 1 lc rgb "#cccccc"
 set grid xtics lt 0 lw 1 lc rgb "#cccccc"
@@ -22,29 +22,28 @@ set grid xtics lt 0 lw 1 lc rgb "#cccccc"
 #set style line 5 lt 5  pt 7 ps 2 lw 2 lc rgb "black"
 
 set style line 1 lw 2 lc rgb "red"
-set style line 2 lt 1 lw 2 lc rgb "blue"
-set style line 3 lt 1 pt 7 ps 2 lw 2 lc rgb "green"
-set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
+set style line 2 lt 1 pt 9 ps 2 lw 2 lc rgb "black"
+set style line 3 lw 2 lc rgb "blue"
+set style line 4 lt 4 pt 3 ps 2 lw 2 lc rgb "red"
+set style line 5 lt 1 pt 7 ps 2 lw 2 lc rgb "green"
 
-set title "Seleção de Rotas - Largura de banda de 10MBits"
+
+set notitle
 set xlabel "Tempo (s)"
-set ylabel "Ocupação do Buffer (s)"
+set ylabel "Vazão (kbps)"
 set xtics 100
-set ytics 5
+set ytics 10000
 
 #set key t r
 
-set xrange [0:600]
-set yrange [0:20]
+set xrange [0:300]
+set yrange [0:50000]
 #urban_pdr.dat
 #urban_pdr.dat
 #plot "plotbufferlevel.dat" using 1:2:4:5  title "Ocupação do Buffer" with linespoints ls 1,\
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotmediasrc1bufferlevel.dat" using 1:3:4  title "Cliente 1" with lines ls 1,\
-\
-"plotmediasrc2bufferlevel.dat" using 1:3:4  title "Cliente 2" with lines ls 2,\
-\
-"plotmediasrc3bufferlevel.dat" using 1:3:4  title "Cliente 3" with lines ls 3,\
+#plot "plotmediaseg.dat" using 1:2  notitle with lines ls 1,\
+"plotmediavazao.dat" using 1:2 notitle with lines ls 3,\
 #1 / 0 notitle  smooth csplines with lines ls 1
