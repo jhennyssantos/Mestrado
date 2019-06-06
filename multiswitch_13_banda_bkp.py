@@ -226,7 +226,6 @@ class SimpleSwitch13(app_manager.RyuApp):
                         actions=actions, data=data)
                 datapath.send_msg(out)
 
-
     def set_queue(self, dpid, port_name):
         # inicializar a conexao com o switch
         if self.ovs_bridge.get(dpid, None) is None:
@@ -253,13 +252,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
 
     def reservarecurso(self, src, dst, path, output_ports):
-   # switch_list = get_switch(self.topology_api_app, None)
-   # switches=[switch.dp.id for switch in switch_list]
      	for sw in path:
-#		if sw = "s1" and port_name = "s1-eth1"
-#			print "Vem do H1 no Sw1"
-			#queue_type = 'linux-htb'
-		 
             # TODO: criar a fila de QoS com Minimal-Rate no switch sw, conforme 
             #     curl -X POST -d '{"port_name": "s1-eth1", "type": "linux-htb", "max_rate": "1000000", "queues": [{"max_rate": "500000"}, {"min_rate": "800000"}]}' http://localhost:8080/qos/queue/0000000000000001
             output_port = output_ports[sw]
@@ -271,7 +264,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
 
 
-#    def novarota(self, client_ip):
+    def novarota(self, client_ip):
         #newpath = nx.shortest_path(self.net, self.src, self.dst)
 
         """
@@ -282,61 +275,61 @@ class SimpleSwitch13(app_manager.RyuApp):
          (10.0.0.2) h3 -- sw3-----sw2 -- h2 (10.0.0.3)
          					       
         """
- #       if client_ip == "10.0.0.1":
+        if client_ip == "10.0.0.1":
             # oldpath = sw1 <-> sw3 <-> sw2
             # newpath = sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
-#            print "Modifica fluxos do no 1"
-#            curpath = [1,3,2]
-#            output_ports = {1: "s1-eth1", 3: "s3-eth2", 2: "s2-eth3"}
-#            src = "00:00:00:00:00:01"
-#            dst = "00:00:00:00:00:02"
-#            self.reservarecurso(src, dst, curpath, output_ports)
+            print "Modifica fluxos do no 1"
+            curpath = [1,3,2]
+            output_ports = {1: "s1-eth1", 3: "s3-eth2", 2: "s2-eth3"}
+            src = "00:00:00:00:00:01"
+            dst = "00:00:00:00:00:02"
+            self.reservarecurso(src, dst, curpath, output_ports)
 
-#        elif client_ip == "10.0.0.3":
+        elif client_ip == "10.0.0.3":
             
-#            print "modifica fluxos do no 3"
-#            curpath = [3,2]
-#            output_ports = {3: "s3-eth2", 2: "s2-eth3"}
-#            src = "00:00:00:00:00:03"
-#            dst = "00:00:00:00:00:02"
-#            self.reservarecurso(src, dst, curpath, output_ports)
+            print "modifica fluxos do no 3"
+            curpath = [3,2]
+            output_ports = {3: "s3-eth2", 2: "s2-eth3"}
+            src = "00:00:00:00:00:03"
+            dst = "00:00:00:00:00:02"
+            self.reservarecurso(src, dst, curpath, output_ports)
             
             # oldpath = sw3 <-> sw2
             # newpath = sw3 <-> sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
         
-#        elif client_ip == "10.0.0.4":
+        elif client_ip == "10.0.0.4":
             
-#            print "modifica fluxos do no 4"
-#            curpath = [4,2]
-#            output_ports = {4: "s4-eth1", 2: "s2-eth3"}
-#            src = "00:00:00:00:00:04"
-#            dst = "00:00:00:00:00:02"
-#            self.reservarecurso(src, dst, curpath, output_ports)
+            print "modifica fluxos do no 4"
+            curpath = [4,2]
+            output_ports = {4: "s4-eth1", 2: "s2-eth3"}
+            src = "00:00:00:00:00:04"
+            dst = "00:00:00:00:00:02"
+            self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw4 <-> sw2
             # newpath = sw4 <-> sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
 
-#        elif client_ip == "10.0.0.5":
+        elif client_ip == "10.0.0.5":
             
-#            print "modifica fluxos do no 5"
-#            curpath = [5,4,2]
-#            output_ports = {5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
-#            src = "00:00:00:00:00:05"
-#            dst = "00:00:00:00:00:02"
-#            self.reservarecurso(src, dst, curpath, output_ports)
+            print "modifica fluxos do no 5"
+            curpath = [5,4,2]
+            output_ports = {5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
+            src = "00:00:00:00:00:05"
+            dst = "00:00:00:00:00:02"
+            self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw5 <-> sw4 <-> sw2
             # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
         
 
- #       elif client_ip == "10.0.0.6":
+        elif client_ip == "10.0.0.6":
             
-  #          print "modifica fluxos do no 6"
-   #         curpath = [6,5,4,2]
-    #        output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
-     #       src = "00:00:00:00:00:06"
-      #      dst = "00:00:00:00:00:02"
-       #     self.reservarecurso(src, dst, curpath, output_ports)
+            print "modifica fluxos do no 6"
+            curpath = [6,5,4,2]
+            output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
+            src = "00:00:00:00:00:06"
+            dst = "00:00:00:00:00:02"
+            self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw6 <-> sw5 <-> sw4 <-> sw2
             # newpath = sw6 <-> sw1 <-> sw3 <-> sw2 
@@ -397,7 +390,7 @@ class SimpleSwitchWSGIApp(ControllerBase):
         oldqlt = int(kwargs['oldqlt'])
         newqlt = int(kwargs['newqlt'])
         if newqlt < oldqlt:
-            self.myapp.reservarecurso(remote_addr)
+            self.myapp.novarota(remote_addr)
         body = json.dumps([])
         return Response(content_type='application/json', body=body)
 
