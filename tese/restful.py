@@ -484,9 +484,9 @@ class QoSController(ControllerBase):
 					msg = function(rest, vid, waiters)
 				else:
 					msg = function(rest, vid)
-				except ValueError as message:
-					return Response(status=400, body=str(message))
-				msgs.append(msg)
+			except ValueError as message:
+				return Response(status=400, body=str(message))
+			msgs.append(msg)
 
 		body = json.dumps(msgs)
 		return Response(content_type='application/json', body=body)
@@ -743,7 +743,7 @@ class QoS(object):
 		try:
 			if rest[REST_QOS_ID] == REST_ALL:
 				qos_id = REST_ALL
-			 else:
+			else:
 				qos_id = int(rest[REST_QOS_ID])
 		except:
 			raise ValueError('Invalid qos id.')
@@ -774,48 +774,262 @@ class QoS(object):
 			msg = {'result': 'failure', 'details': msg_details}
 		else:
 			cmd = self.dp.ofproto.OFPFC_DELETE_STRICT
- actions = []
- delete_ids = {}
- for cookie, priority, match in delete_list:
- flow = self._to_of_flow(cookie=cookie,
-priority=priority,
- match=match,
-actions=actions)
- self.ofctl.mod_flow_entry(self.dp, flow, cmd)
- vid = match.get(REST_DL_VLAN, VLANID_NONE)
- rule_id = QoS._cookie_to_qosid(cookie)
- delete_ids.setdefault(vid, '')
- delete_ids[vid] += (('%d' if delete_ids[vid] == ''
- else ',%d') % rule_id)
- msg = []
- for vid, rule_ids in delete_ids.items():
- del_msg = {'result': 'success',
- 'details': ' deleted. : QoS ID=%s' %
-rule_ids}
- if vid != VLANID_NONE:
- del_msg.setdefault(REST_VLANID, vid)
- msg.append(del_msg)
- return REST_COMMAND_RESULT, msg
- @rest_command
- def set_meter(self, rest, vlan_id, waiters):
- if self.version == ofproto_v1_0.OFP_VERSION:
- raise ValueError('set_meter operation is not supported')
- msgs = []
- msg = self._set_meter(rest, waiters)
- msgs.append(msg)
- return REST_COMMAND_RESULT, msgs
- def _set_meter(self, rest, waiters):
- cmd = self.dp.ofproto.OFPMC_ADD
- try:
- self.ofctl.mod_meter_entry(self.dp, rest, cmd)
- except:
- raise ValueError('Invalid meter parameter.')
- msg = {'result': 'success',
- 'details': 'Meter added. : Meter ID=%s' %
- rest[REST_METER_ID]}
- return msg
- @rest_command
- def get_meter(self, rest, vlan_id, waiters):
- if (self.version == ofproto_v1_0.OFP_VERSION or
- self.version == ofproto_v1_2.OFP_VERSION):
- raise ValueError('get_meter operation is not supported')
+			actions = []
+			delete_ids = {}
+			for cookie, priority, match in delete_list:
+				flow = self._to_of_flow(cookie=cookie, priority=priority, match=match, actions=actions)
+				self.ofctl.mod_flow_entry(self.dp, flow, cmd)
+				vid = match.get(REST_DL_VLAN, VLANID_NONE)
+				rule_id = QoS._cookie_to_qosid(cookie)
+				delete_ids.setdefault(vid, '')
+				delete_ids[vid] += (('%d' if delete_ids[vid] == ''
+					else ',%d') % rule_id)
+			msg = []
+			for vid, rule_ids in delete_ids.items():
+				del_msg = {'result': 'success', 'details': ' deleted. : QoS ID=%s' % rule_ids}
+				if vid != VLANID_NONE:
+					del_msg.setdefault(REST_VLANID, vid)
+				msg.append(del_msg)
+			return REST_COMMAND_RESULT, msg
+
+	@rest_command
+	def set_meter(self, rest, vlan_id, waiters):
+		if self.version == ofproto_v1_0.OFP_VERSION:
+			raise ValueError('set_meter operation is not supported')
+		msgs = []
+		msg = self._set_meter(rest, waiters)
+		msgs.append(msg)
+		return REST_COMMAND_RESULT, msgs
+
+	def _set_meter(self, rest, waiters):
+		cmd = self.dp.ofproto.OFPMC_ADD
+		try:
+			self.ofctl.mod_meter_entry(self.dp, rest, cmd)
+		except:
+			raise ValueError('Invalid meter parameter.')
+		msg = {'result': 'success', 'details': 'Meter added. : Meter ID=%s' % rest[REST_METER_ID]}
+		return msg
+
+	@rest_command
+	def get_meter(self, rest, vlan_id, waiters):
+		if (self.version == ofproto_v1_0.OFP_VERSION or
+			 self.version == ofproto_v1_2.OFP_VERSION):
+			raise ValueError('get_meter operation is not supported')
+			
+		msgs = self.ofctl.get_meter_stats(self.dp, waiters)
+		return REST_COMMAND_RESULT, msgs
+
+	@rest_command
+	def delete_meter(self, rest, vlan_id, waiters):
+		if (self.version == ofproto_v1_0.OFP_VERSION or
+			self.version == ofproto_v1_2.OFP_VERSION):
+			raise ValueError('delete_meter operation is not supported')
+		cmd = self.dp.ofproto.OFPMC_DELETE
+		try:
+			self.ofctl.mod_meter_entry(self.dp, rest, cmd)
+		except:
+			raise ValueError('Invalid meter parameter.')
+		msg = {'result': 'success', 'details': 'Meter deleted. : Meter ID=%s' % rest[REST_METER_ID]}
+		return REST_COMMAND_RESULT, msg
+
+
+	def _to_of_flow(self, cookie, priority, match, actions):
+		flow = {'cookie': cookie, 'priority': priority, 'flags': 0, 'idle_timeout': 0, 'hard_timeout': 0, 'match': match, 'actions': actions}
+		return flow
+
+
+	def _to_rest_rule(self, flow):
+		ruleid = QoS._cookie_to_qosid(flow[REST_COOKIE])
+		rule = {REST_QOS_ID: ruleid}
+		rule.update({REST_PRIORITY: flow[REST_PRIORITY]})
+		rule.update(Match.to_rest(flow))
+		rule.update(Action.to_rest(flow))
+		return rule
+
+class Match(object):
+	_CONVERT = {REST_DL_TYPE:
+		{REST_DL_TYPE_ARP: ether.ETH_TYPE_ARP,
+		REST_DL_TYPE_IPV4: ether.ETH_TYPE_IP,
+		REST_DL_TYPE_IPV6: ether.ETH_TYPE_IPV6},
+		REST_NW_PROTO:
+		{REST_NW_PROTO_TCP: inet.IPPROTO_TCP,
+		REST_NW_PROTO_UDP: inet.IPPROTO_UDP,
+		REST_NW_PROTO_ICMP: inet.IPPROTO_ICMP,
+		REST_NW_PROTO_ICMPV6: inet.IPPROTO_ICMPV6}}
+
+	@staticmethod
+	def to_openflow(rest):
+		def __inv_combi(msg):
+			raise ValueError('Invalid combination: [%s]' % msg)
+
+		def __inv_2and1(*args):
+			__inv_combi('%s=%s and %s' % (args[0], args[1], args[2]))
+
+		def __inv_2and2(*args):
+			__inv_combi('%s=%s and %s=%s' % (args[0], args[1], args[2], args[3]))
+
+		def __inv_1and1(*args):
+			__inv_combi('%s and %s' % (args[0], args[1]))
+
+		def __inv_1and2(*args):
+			__inv_combi('%s and %s=%s' % (args[0], args[1], args[2]))
+
+		match = {}
+		# error check
+		dl_type = rest.get(REST_DL_TYPE)
+		nw_proto = rest.get(REST_NW_PROTO)
+		if dl_type is not None:
+			if dl_type == REST_DL_TYPE_ARP:
+				if REST_SRC_IPV6 in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_ARP, REST_SRC_IPV6)
+				if REST_DST_IPV6 in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_ARP, REST_DST_IPV6)
+				if REST_DSCP in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_ARP, REST_DSCP)
+				if nw_proto:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_ARP, REST_NW_PROTO)
+			elif dl_type == REST_DL_TYPE_IPV4:
+				if REST_SRC_IPV6 in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_IPV4, REST_SRC_IPV6)
+				if REST_DST_IPV6 in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_IPV4, REST_DST_IPV6)
+				if nw_proto == REST_NW_PROTO_ICMPV6:
+					__inv_2and2(
+						REST_DL_TYPE, REST_DL_TYPE_IPV4, REST_NW_PROTO, REST_NW_PROTO_ICMPV6)
+			elif dl_type == REST_DL_TYPE_IPV6:
+				if REST_SRC_IP in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_IPV6, REST_SRC_IP)
+				if REST_DST_IP in rest:
+					__inv_2and1(
+						REST_DL_TYPE, REST_DL_TYPE_IPV6, REST_DST_IP)
+				if nw_proto == REST_NW_PROTO_ICMP:
+					__inv_2and2(
+						REST_DL_TYPE, REST_DL_TYPE_IPV6, REST_NW_PROTO, REST_NW_PROTO_ICMP)
+			else:
+				raise ValueError('Unknown dl_type : %s' % dl_type)
+		else:
+			if REST_SRC_IP in rest:
+				if REST_SRC_IPV6 in rest:
+					__inv_1and1(REST_SRC_IP, REST_SRC_IPV6)
+				if REST_DST_IPV6 in rest:
+					__inv_1and1(REST_SRC_IP, REST_DST_IPV6)
+				if nw_proto == REST_NW_PROTO_ICMPV6:
+					__inv_1and2(
+						REST_SRC_IP, REST_NW_PROTO, REST_NW_PROTO_ICMPV6)
+				rest[REST_DL_TYPE] = REST_DL_TYPE_IPV4
+			elif REST_DST_IP in rest:
+				if REST_SRC_IPV6 in rest:
+					__inv_1and1(REST_DST_IP, REST_SRC_IPV6)
+				if REST_DST_IPV6 in rest:
+					__inv_1and1(REST_DST_IP, REST_DST_IPV6)
+				if nw_proto == REST_NW_PROTO_ICMPV6:
+					__inv_1and2(
+						REST_DST_IP, REST_NW_PROTO, REST_NW_PROTO_ICMPV6)
+				rest[REST_DL_TYPE] = REST_DL_TYPE_IPV4
+			elif REST_SRC_IPV6 in rest:
+				if nw_proto == REST_NW_PROTO_ICMP:
+					__inv_1and2(
+						REST_SRC_IPV6, REST_NW_PROTO, REST_NW_PROTO_ICMP)
+				rest[REST_DL_TYPE] = REST_DL_TYPE_IPV6
+			elif REST_DST_IPV6 in rest:
+				if nw_proto == REST_NW_PROTO_ICMP:
+					__inv_1and2(
+						REST_DST_IPV6, REST_NW_PROTO, REST_NW_PROTO_ICMP)
+				rest[REST_DL_TYPE] = REST_DL_TYPE_IPV6
+			elif REST_DSCP in rest:
+				# Apply dl_type ipv4, if doesn't specify dl_type
+				rest[REST_DL_TYPE] = REST_DL_TYPE_IPV4
+			else:
+				if nw_proto == REST_NW_PROTO_ICMP:
+					rest[REST_DL_TYPE] = REST_DL_TYPE_IPV4
+				elif nw_proto == REST_NW_PROTO_ICMPV6:
+					rest[REST_DL_TYPE] = REST_DL_TYPE_IPV6
+				elif nw_proto == REST_NW_PROTO_TCP or \
+						nw_proto == REST_NW_PROTO_UDP:
+					raise ValueError('no dl_type was specified')
+				else:
+					raise ValueError('Unknown nw_proto: %s' % nw_proto)
+		for key, value in rest.items():
+			if key in Match._CONVERT:
+				if value in Match._CONVERT[key]:
+					match.setdefault(key, Match._CONVERT[key][value])
+				else:
+					raise ValueError('Invalid rule parameter. : key=%s' % key)
+			else:
+				match.setdefault(key, value)
+		return match
+	
+	@staticmethod
+	def to_rest(openflow):
+		of_match = openflow[REST_MATCH]
+		mac_dontcare = mac.haddr_to_str(mac.DONTCARE)
+		ip_dontcare = '0.0.0.0'
+		ipv6_dontcare = '::'
+		match = {}
+
+		for key, value in of_match.items():
+			if key == REST_SRC_MAC or key == REST_DST_MAC:
+				if value == mac_dontcare:
+					continue
+			elif key == REST_SRC_IP or key == REST_DST_IP:
+				if value == ip_dontcare:
+					continue
+			elif key == REST_SRC_IPV6 or key == REST_DST_IPV6:
+				if value == ipv6_dontcare:
+					continue
+			elif value == 0:
+				continue
+			if key in Match._CONVERT:
+				conv = Match._CONVERT[key]
+				conv = dict((value, key) for key, value in conv.items())
+				match.setdefault(key, conv[value])
+			else:
+				match.setdefault(key, value)
+		return match
+	
+	@staticmethod
+	def to_mod_openflow(of_match):
+		mac_dontcare = mac.haddr_to_str(mac.DONTCARE)
+		ip_dontcare = '0.0.0.0'
+		ipv6_dontcare = '::'
+		match = {}
+		for key, value in of_match.items():
+			if key == REST_SRC_MAC or key == REST_DST_MAC:
+				if value == mac_dontcare:
+					continue
+			elif key == REST_SRC_IP or key == REST_DST_IP:
+				if value == ip_dontcare:
+					continue
+			elif key == REST_SRC_IPV6 or key == REST_DST_IPV6:
+				if value == ipv6_dontcare:
+					continue
+			elif value == 0:
+				continue
+			match.setdefault(key, value)
+		return match
+class Action(object):
+	@staticmethod
+	def to_rest(openflow):
+		if REST_ACTION in openflow:
+			actions = []
+			for action in openflow[REST_ACTION]:
+				field_value = re.search('SET_FIELD: {ip_dscp:(\d+)', action)
+				if field_value:
+					actions.append({REST_ACTION_MARK: field_value.group(1)})
+				meter_value = re.search('METER:(\d+)', action)
+				if meter_value:
+					actions.append({REST_ACTION_METER: meter_value.group(1)})
+				queue_value = re.search('SET_QUEUE:(\d+)', action)
+				if queue_value:
+					actions.append({REST_ACTION_QUEUE: queue_value.group(1)})
+				action = {REST_ACTION: actions}
+		else:
+			action = {REST_ACTION: 'Unknown action type.'}
+		return action
