@@ -31,6 +31,8 @@ from webob import Response
 from ryu.app.wsgi import ControllerBase, WSGIApplication, route
 from ryu.lib import dpid as dpid_lib
 from ryu.lib.ovs import bridge
+#from ovs_vsctl import VSCtl
+
 
 myapp_name = 'simple_switch_api'
 base_url = '/simpleswitch'
@@ -54,6 +56,8 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.ovs_bridge = {}
         wsgi = kwargs['wsgi']
         wsgi.register(SimpleSwitchWSGIApp,{myapp_name: self})
+        # OVSDB_ADDR = 'tcp:127.0.0.1:6632'
+        # ovs_vsctl = VSCtl(OVSDB_ADDR)
 
 
     @set_ev_cls(dpset.EventDP, dpset.DPSET_EV_DISPATCHER)
@@ -164,7 +168,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 
-        # learn a mac address to avoid FLOOD next time, except if received 
+        # learn a mac address to avoid FLOOD next time, except if received
         # in backbone port
         if in_port not in self.net.node[dpid].get('backbone_ports', []):
             self.mac_to_port[dpid][src] = in_port
@@ -176,9 +180,9 @@ class SimpleSwitch13(app_manager.RyuApp):
         else:
             dst_sw = None
 
-        
-        # if destination switch (dst_sw) is known, then we just search for a 
-        # path on the graph and install a flow along this path. Otherwise, we 
+
+        # if destination switch (dst_sw) is known, then we just search for a
+        # path on the graph and install a flow along this path. Otherwise, we
         # flood the packet into the access ports for all switches
         if dst_sw:
             path = nx.shortest_path(self.net, dpid, dst_sw)
@@ -189,7 +193,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             self.logger.info("==> path(src=%s,dst=%s): %s", dpid, dst_sw, path)
             for i in range(len(path)-1,-1,-1):
                 sw = path[i]
-                
+
                 buff_id = None
                 if i == 0: # first switch
                     match_in_port = in_port
@@ -203,7 +207,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                     next_sw = path[i+1]
                     action_out_port = self.net.edge[sw][next_sw]['sport']
                 self.logger.info("==> add_flow sw=%s match_in_port=%s action_out_port=%s", sw, match_in_port, action_out_port)
-                match = parser.OFPMatch(in_port=match_in_port, 
+                match = parser.OFPMatch(in_port=match_in_port,
                         eth_dst=dst, eth_src=src)
                 actions = [parser.OFPActionOutput(action_out_port)]
                 self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
@@ -220,7 +224,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                     actions = [parser.OFPActionOutput(p)]
                 data = msg.data
                 datapath = self.net.node[sw]['conn']
-                out = parser.OFPPacketOut(datapath=datapath, 
+                out = parser.OFPPacketOut(datapath=datapath,
                         in_port = ofproto.OFPP_LOCAL,
                         buffer_id=ofproto.OFP_NO_BUFFER,
                         actions=actions, data=data)
@@ -259,8 +263,8 @@ class SimpleSwitch13(app_manager.RyuApp):
 #		if sw = "s1" and port_name = "s1-eth1"
 #			print "Vem do H1 no Sw1"
 			#queue_type = 'linux-htb'
-		 
-            # TODO: criar a fila de QoS com Minimal-Rate no switch sw, conforme 
+
+            # TODO: criar a fila de QoS com Minimal-Rate no switch sw, conforme
             #     curl -X POST -d '{"port_name": "s1-eth1", "type": "linux-htb", "max_rate": "1000000", "queues": [{"max_rate": "500000"}, {"min_rate": "800000"}]}' http://localhost:8080/qos/queue/0000000000000001
             output_port = output_ports[sw]
             status = self.set_queue(sw, output_port)
@@ -276,11 +280,11 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         """
         			h6 -- sw6---- sw5 -- h5 (10.0.0.5)
-       					   |	   | 
+       					   |	   |
          (10.0.0.1) h1 -- sw1     sw4 -- h4 (10.0.0.4)
                             |      |
          (10.0.0.2) h3 -- sw3-----sw2 -- h2 (10.0.0.3)
-         					       
+
         """
  #       if client_ip == "10.0.0.1":
             # oldpath = sw1 <-> sw3 <-> sw2
@@ -293,19 +297,19 @@ class SimpleSwitch13(app_manager.RyuApp):
 #            self.reservarecurso(src, dst, curpath, output_ports)
 
 #        elif client_ip == "10.0.0.3":
-            
+
 #            print "modifica fluxos do no 3"
 #            curpath = [3,2]
 #            output_ports = {3: "s3-eth2", 2: "s2-eth3"}
 #            src = "00:00:00:00:00:03"
 #            dst = "00:00:00:00:00:02"
 #            self.reservarecurso(src, dst, curpath, output_ports)
-            
+
             # oldpath = sw3 <-> sw2
             # newpath = sw3 <-> sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
-        
+
 #        elif client_ip == "10.0.0.4":
-            
+
 #            print "modifica fluxos do no 4"
 #            curpath = [4,2]
 #            output_ports = {4: "s4-eth1", 2: "s2-eth3"}
@@ -317,7 +321,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             # newpath = sw4 <-> sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
 
 #        elif client_ip == "10.0.0.5":
-            
+
 #            print "modifica fluxos do no 5"
 #            curpath = [5,4,2]
 #            output_ports = {5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
@@ -327,10 +331,10 @@ class SimpleSwitch13(app_manager.RyuApp):
 
             # oldpath = sw5 <-> sw4 <-> sw2
             # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
-        
+
 
  #       elif client_ip == "10.0.0.6":
-            
+
   #          print "modifica fluxos do no 6"
    #         curpath = [6,5,4,2]
     #        output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
@@ -339,21 +343,21 @@ class SimpleSwitch13(app_manager.RyuApp):
        #     self.reservarecurso(src, dst, curpath, output_ports)
 
             # oldpath = sw6 <-> sw5 <-> sw4 <-> sw2
-            # newpath = sw6 <-> sw1 <-> sw3 <-> sw2 
+            # newpath = sw6 <-> sw1 <-> sw3 <-> sw2
 
         #print "\n \n RECALCULANDO ", newpath
 
         #if self.oldpath != newpath:
         #    return newpath
         #return self.oldpath
-        
+
         # 1) saber qual era a rota antiga de origem para destino
         # 2) procurar uma nova rota de origem para destino que nao seja a antiga
         # 3) modificar a tabela de fluxo dos switches para essa nova rota
-        
+
     def modifica_fluxos(self, src, dst, newpath):
         indice = "%s-%s" % (src, dst)
-           
+
         in_port = self.fluxos_ativos[indice]['in_port']
         out_port = self.fluxos_ativos[indice]['out_port']
         oldpath = self.fluxos_ativos[indice]['path']
@@ -372,7 +376,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             self.logger.info("==> add_flow sw=%s match_in_port=%s action_out_port=%s", sw, match_in_port, action_out_port)
             datapath = self.net.node[sw]['conn']
             parser = datapath.ofproto_parser
-            match = parser.OFPMatch(in_port=match_in_port, 
+            match = parser.OFPMatch(in_port=match_in_port,
                     eth_dst=dst, eth_src=src)
             actions = [parser.OFPActionOutput(action_out_port)]
             self.add_flow(datapath, 1, match, actions)
@@ -383,7 +387,7 @@ class SimpleSwitch13(app_manager.RyuApp):
             match = parser.OFPMatch(eth_dst=dst, eth_src=src)
             self.remove_flow(datapath, match)
         # TODO: Remover os fluxos da rota antiga cujos nos nao pertencam a rota nova!
-       	
+
 class SimpleSwitchWSGIApp(ControllerBase):
     def __init__(self, req, link, data, **config):
         super(SimpleSwitchWSGIApp, self).__init__(req, link, data, **config)
@@ -400,4 +404,3 @@ class SimpleSwitchWSGIApp(ControllerBase):
             self.myapp.reservarecurso(remote_addr)
         body = json.dumps([])
         return Response(content_type='application/json', body=body)
-
