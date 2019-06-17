@@ -27,10 +27,10 @@ def create_topology():
     s6 = net.addSwitch('s6', protocols='OpenFlow13')
     s7 = net.addSwitch('s7', protocols='OpenFlow13')
     s8 = net.addSwitch('s8', protocols='OpenFlow13')
-  
-    
+
+
     #linkopts=dict(bw=50,  delay='5ms')#,   use_htb=True)#, loss=0,max_queue_size=100)
-    
+
     info( '*** Adding switch links\n' )
     net.addLink(s1,s3, bw = INITIAL_BW)
     net.addLink(s3,s2, bw = INITIAL_BW)
@@ -40,7 +40,7 @@ def create_topology():
     net.addLink(s6,s7, bw = INITIAL_BW)
     net.addLink(s7,s8, bw = INITIAL_BW)
     net.addLink(s8,s1, bw = INITIAL_BW)
-    
+
     info( '*** Adding hosts\n' )
     h1 = net.addHost( 'h1', ip='10.0.0.1/24' )
     h2 = net.addHost( 'h2', ip='10.0.0.2/24' )
@@ -51,7 +51,7 @@ def create_topology():
     h7 = net.addHost( 'h7', ip='10.0.0.7/24' )
     h8 = net.addHost( 'h8', ip='10.0.0.7/24' )
 
-    
+
     info( '*** Adding host links\n' )
     net.addLink(s1,h1)#,**linkopts)
     net.addLink(s2,h2)#,**linkopts)
@@ -108,11 +108,11 @@ def create_topology():
     #h6.cmd("route add default gw 10.0.0.4")
     # h7.cmd("route add default gw 10.0.0.4")
     # h8.cmd("route add default gw 10.0.0.4")
-    
+
     #info( '*** Starting iperf3 servers on h2 and h4 and h6\n' )
     #h4.cmd("iperf3 -s -i 5 --logfile /tmp/saida-iperf-server-h4-%s.dat &" % (when))
     #sleep(2)
-    
+
     info( '*** Running CLI\n' )
     CLI( net )
     info( '*** Stopping Mininet\n' )
