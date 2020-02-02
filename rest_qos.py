@@ -317,7 +317,7 @@ class RestQoSAPI(app_manager.RyuApp):
         else:
             QoSController._LOGGER.debug("unknown event: %s", ev)
 
-    @set_ev_cls(dpset.EventDP, dpset.DPSET_EV_DISPATCHER)
+#    @set_ev_cls(dpset.EventDP, dpset.DPSET_EV_DISPATCHER)
     def handler_datapath(self, ev):
         if ev.enter:
             QoSController.regist_ofs(ev.dp, self.CONF)
@@ -325,22 +325,22 @@ class RestQoSAPI(app_manager.RyuApp):
             QoSController.unregist_ofs(ev.dp)
 
     # for OpenFlow version1.0
-    @set_ev_cls(ofp_event.EventOFPFlowStatsReply, MAIN_DISPATCHER)
+#    @set_ev_cls(ofp_event.EventOFPFlowStatsReply, MAIN_DISPATCHER)
     def stats_reply_handler_v1_0(self, ev):
         self.stats_reply_handler(ev)
 
     # for OpenFlow version1.2 or later
-    @set_ev_cls(ofp_event.EventOFPStatsReply, MAIN_DISPATCHER)
+#    @set_ev_cls(ofp_event.EventOFPStatsReply, MAIN_DISPATCHER)
     def stats_reply_handler_v1_2(self, ev):
         self.stats_reply_handler(ev)
 
     # for OpenFlow version1.2 or later
-    @set_ev_cls(ofp_event.EventOFPQueueStatsReply, MAIN_DISPATCHER)
+#    @set_ev_cls(ofp_event.EventOFPQueueStatsReply, MAIN_DISPATCHER)
     def queue_stats_reply_handler_v1_2(self, ev):
         self.stats_reply_handler(ev)
 
     # for OpenFlow version1.2 or later
-    @set_ev_cls(ofp_event.EventOFPMeterStatsReply, MAIN_DISPATCHER)
+#    @set_ev_cls(ofp_event.EventOFPMeterStatsReply, MAIN_DISPATCHER)
     def meter_stats_reply_handler_v1_2(self, ev):
         self.stats_reply_handler(ev)
 
