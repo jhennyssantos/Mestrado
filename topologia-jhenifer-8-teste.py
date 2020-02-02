@@ -81,6 +81,15 @@ def create_topology():
     s7.cmd("ovs-vsctl set Bridge s7 protocols=OpenFlow13")
     s8.cmd("ovs-vsctl set Bridge s8 protocols=OpenFlow13")
 
+# teste para ping 
+    s1.cmd("ovs-ofctl -O Openflow13 dump-flows s1")
+    s2.cmd("ovs-ofctl -O Openflow13 dump-flows s2")
+    s3.cmd("ovs-ofctl -O Openflow13 dump-flows s3")
+    s4.cmd("ovs-ofctl -O Openflow13 dump-flows s4")
+    s5.cmd("ovs-ofctl -O Openflow13 dump-flows s5")
+    s6.cmd("ovs-ofctl -O Openflow13 dump-flows s6")
+    s7.cmd("ovs-ofctl -O Openflow13 dump-flows s7")
+    s8.cmd("ovs-ofctl -O Openflow13 dump-flows s8")
 
     # Workaround parte 2 - para adicionar interface externa ao host h4
     s4.cmd("ovs-vsctl del-port s4 s4-eth4")
