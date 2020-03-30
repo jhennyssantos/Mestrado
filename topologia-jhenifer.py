@@ -44,8 +44,6 @@ def create_topology():
     h4 = net.addHost( 'h4', ip='10.0.0.4/24' )
     h5 = net.addHost( 'h5', ip='10.0.0.5/24' )
     h6 = net.addHost( 'h6', ip='10.0.0.6/24' )
-    h7 = net.addHost( 'h7', ip='10.0.0.7/24' )
-
     
     info( '*** Adding host links\n' )
     net.addLink(s1,h1)#,**linkopts)
@@ -53,7 +51,7 @@ def create_topology():
     net.addLink(s3,h3)#,**linkopts)
     net.addLink(s4,h4)#,**linkopts)
     net.addLink(s5,h5)
-    net.addLink(s5,h7)
+    #net.addLink(s5,h7)
     net.addLink(s6,h6)
 
 
@@ -72,6 +70,15 @@ def create_topology():
     s4.cmd("ovs-vsctl set Bridge s4 protocols=OpenFlow13")
     s5.cmd("ovs-vsctl set Bridge s5 protocols=OpenFlow13")
     s6.cmd("ovs-vsctl set Bridge s6 protocols=OpenFlow13")
+
+    # teste para ping 
+    s1.cmd("ovs-ofctl -O Openflow13 dump-flows s1")
+    s2.cmd("ovs-ofctl -O Openflow13 dump-flows s2")
+    s3.cmd("ovs-ofctl -O Openflow13 dump-flows s3")
+    s4.cmd("ovs-ofctl -O Openflow13 dump-flows s4")
+    s5.cmd("ovs-ofctl -O Openflow13 dump-flows s5")
+    s6.cmd("ovs-ofctl -O Openflow13 dump-flows s6")
+
 
 
     # Workaround parte 2 - para adicionar interface externa ao host h4
@@ -93,8 +100,8 @@ def create_topology():
     h5.cmd("ping -c4 10.0.0.4 &")
     h6.cmd("route add default gw 10.0.0.4")
     h6.cmd("ping -c4 10.0.0.4 &")
-    h7.cmd("route add default gw 10.0.0.4")
-    h7.cmd("ping -c4 10.0.0.4 &")
+   # h7.cmd("route add default gw 10.0.0.4")
+   # h7.cmd("ping -c4 10.0.0.4 &")
     #h6.cmd("route add default gw 10.0.0.4")
     # h7.cmd("route add default gw 10.0.0.4")
     # h8.cmd("route add default gw 10.0.0.4")
@@ -104,11 +111,11 @@ def create_topology():
     #sleep(2)
 
     ##################### ARP #####################
-    for i in xrange(7):
+    for i in xrange(6):
         h = net.get('h%d' % (i+1) )
         h.cmd("ip route add default dev eth0")
         # h.setDefaultRoute("dev eth0 via %s" % "10.0.0.254" )
-        for j in xrange(7):
+        for j in xrange(6):
             if i != j:
                 h_dst = net.get('h%d' % (j+1) )
                 h.setARP(h_dst.IP(), h_dst.MAC())

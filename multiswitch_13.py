@@ -151,7 +151,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         if dst_sw:
             path = nx.shortest_path(self.net, dpid, dst_sw)
             self.logger.info("==> path(src=%s,dst=%s): %s", dpid, dst_sw, path)
-            for i in range(len(path)-1,-1,-1):
+            for i in range(len(path)-1,-1,-1,-1):
                 sw = path[i]
                 buff_id = None
                 if i == 0: # first switch

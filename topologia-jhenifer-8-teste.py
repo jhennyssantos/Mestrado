@@ -40,6 +40,8 @@ def create_topology():
     net.addLink(s6,s7, bw = INITIAL_BW)
     net.addLink(s7,s8, bw = INITIAL_BW)
     net.addLink(s8,s1, bw = INITIAL_BW)
+#    
+    net.addLink(s1,s8, bw = INITIAL_BW)
 
     info( '*** Adding hosts\n' )
     h1 = net.addHost( 'h1', ip='10.0.0.1/24' )
@@ -121,6 +123,17 @@ def create_topology():
     #info( '*** Starting iperf3 servers on h2 and h4 and h6\n' )
     #h4.cmd("iperf3 -s -i 5 --logfile /tmp/saida-iperf-server-h4-%s.dat &" % (when))
     #sleep(2)
+
+##################### ARP #####################
+    for i in xrange(8):
+        h = net.get('h%d' % (i+1) )
+        h.cmd("ip route add default dev eth0")
+        # h.setDefaultRoute("dev eth0 via %s" % "10.0.0.254" )
+        for j in xrange(8):
+            if i != j:
+                h_dst = net.get('h%d' % (j+1) )
+                h.setARP(h_dst.IP(), h_dst.MAC())
+    ##############################################
 
     info( '*** Running CLI\n' )
     CLI( net )

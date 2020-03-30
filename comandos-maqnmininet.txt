@@ -1,0 +1,59 @@
+ssh -X 192.168.56.102 -l mininet
+
+scp 
+
+apt download
+
+thunar . &
+
+### 
+#montando particao windows
+mount /dev/sda2 /mnt
+cd /mnt
+###
+
+
+
+Fluxos Background 
+
+sudo ./ITGDec 168sp03.log -b 1000 bitrate.dat
+sudo ./ITGDec 168sp03.log -d 1000 delay.dat
+sudo ./ITGDec 168sp03.log -j 1000 jitter.dat
+
+cd /usr/bin/
+./ITGSend script_file -l
+./ITGRecv -l 3158np04.log
+
+Executar Chrome no Nó
+chromium-browser --disable-security --no-sandbox --user-data-dir
+
+
+Git
+
+git pull
+git add *
+git commit -m "Novos testes"
+git push origin master
+
+
+QoS
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/ovsdb_addr
+sudo lsof -i -P | grep LIST
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/ovsdb_addr
+echo 'curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/ovsdb_addr' > a.sh
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/tcp:127.0.0.1:6640
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/tcp:127.0.0.1:6632
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/tcp:127.0.0.1
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/tcp:127.0.0.1:6632
+
+tc qdisc show s7-eth3
+tc qdisc show dev s7-eth3
+tc qdisc add dev s7-eth3 root handle 1: htb
+sudo tc qdisc add dev s7-eth3 root handle 1: htb
+tc qdisc show dev s7-eth3
+curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/ovsdb_addr
+
+curl -X POST -d '{"port_name": "s1-eth1", "type": "linux-htb", "max_rate": "1000000", "queues": [{max_rate": "500000"}, {min_rate": "800000"}]}' http://localhost:8080/qos/queue/0000000000000001
+curl -X PUT -d "tcp:127.0.0.1:6632" http://localhost:8080/v1.0/conf/switches/0000000000000001/ovsdb_addr
+

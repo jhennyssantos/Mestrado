@@ -10,7 +10,7 @@ from mininet.log import setLogLevel, info
 import os
 from time import strftime,localtime,sleep
 
-INITIAL_BW = 10
+INITIAL_BW = 6
 
 def create_topology():
     when = strftime("%Y-%m-%d_%H:%M:%S", localtime())
@@ -18,6 +18,7 @@ def create_topology():
     net = Mininet (link=TCLink, autoSetMacs=True)
     info('\n')
     info('\n')
+
     info( '*** Adding switches\n' )
     s1 = net.addSwitch('s1', protocols='OpenFlow13')
     s2 = net.addSwitch('s2', protocols='OpenFlow13')
@@ -25,8 +26,6 @@ def create_topology():
     s4 = net.addSwitch('s4', protocols='OpenFlow13')
     s5 = net.addSwitch('s5', protocols='OpenFlow13')
     s6 = net.addSwitch('s6', protocols='OpenFlow13')
-    s7 = net.addSwitch('s7', protocols='OpenFlow13')
-    s8 = net.addSwitch('s8', protocols='OpenFlow13')
 
 
     #linkopts=dict(bw=50,  delay='5ms')#,   use_htb=True)#, loss=0,max_queue_size=100)
@@ -37,9 +36,8 @@ def create_topology():
     net.addLink(s2,s4, bw = INITIAL_BW)
     net.addLink(s4,s5, bw = INITIAL_BW)
     net.addLink(s5,s6, bw = INITIAL_BW)
-    net.addLink(s6,s7, bw = INITIAL_BW)
-    net.addLink(s7,s8, bw = INITIAL_BW)
-    net.addLink(s8,s1, bw = INITIAL_BW)
+    net.addLink(s6,s1, bw = INITIAL_BW)
+    
 
     info( '*** Adding hosts\n' )
     h1 = net.addHost( 'h1', ip='10.0.0.1/24' )
@@ -48,9 +46,6 @@ def create_topology():
     h4 = net.addHost( 'h4', ip='10.0.0.4/24' )
     h5 = net.addHost( 'h5', ip='10.0.0.5/24' )
     h6 = net.addHost( 'h6', ip='10.0.0.6/24' )
-    h7 = net.addHost( 'h7', ip='10.0.0.7/24' )
-    h8 = net.addHost( 'h8', ip='10.0.0.8/24' )
-
 
     info( '*** Adding host links\n' )
     net.addLink(s1,h1)#,**linkopts)
@@ -59,9 +54,6 @@ def create_topology():
     net.addLink(s4,h4)#,**linkopts)
     net.addLink(s5,h5)
     net.addLink(s6,h6)
-    net.addLink(s7,h7)
-    net.addLink(s8,h8)
-
 
     # Workaround parte 1 - para adicionar interface externa ao host h4
     net.addLink(s4,h4)
@@ -78,8 +70,14 @@ def create_topology():
     s4.cmd("ovs-vsctl set Bridge s4 protocols=OpenFlow13")
     s5.cmd("ovs-vsctl set Bridge s5 protocols=OpenFlow13")
     s6.cmd("ovs-vsctl set Bridge s6 protocols=OpenFlow13")
-    s7.cmd("ovs-vsctl set Bridge s7 protocols=OpenFlow13")
-    s8.cmd("ovs-vsctl set Bridge s8 protocols=OpenFlow13")
+
+# teste para ping 
+    s1.cmd("ovs-ofctl -O Openflow13 dump-flows s1")
+    s2.cmd("ovs-ofctl -O Openflow13 dump-flows s2")
+    s3.cmd("ovs-ofctl -O Openflow13 dump-flows s3")
+    s4.cmd("ovs-ofctl -O Openflow13 dump-flows s4")
+    s5.cmd("ovs-ofctl -O Openflow13 dump-flows s5")
+    s6.cmd("ovs-ofctl -O Openflow13 dump-flows s6")
 
 
     # Workaround parte 2 - para adicionar interface externa ao host h4
@@ -101,24 +99,18 @@ def create_topology():
     h5.cmd("ping -c4 10.0.0.4 &")
     h6.cmd("route add default gw 10.0.0.4")
     h6.cmd("ping -c4 10.0.0.4 &")
-    h7.cmd("route add default gw 10.0.0.4")
-    h7.cmd("ping -c4 10.0.0.4 &")
-    h8.cmd("route add default gw 10.0.0.4")
-    h8.cmd("ping -c4 10.0.0.4 &")
-    #h6.cmd("route add default gw 10.0.0.4")
-    # h7.cmd("route add default gw 10.0.0.4")
-    # h8.cmd("route add default gw 10.0.0.4")
+    
 
     #info( '*** Starting iperf3 servers on h2 and h4 and h6\n' )
     #h4.cmd("iperf3 -s -i 5 --logfile /tmp/saida-iperf-server-h4-%s.dat &" % (when))
     #sleep(2)
 
-    ##################### ARP #####################
-    for i in xrange(8):
+##################### ARP #####################
+    for i in xrange(6):
         h = net.get('h%d' % (i+1) )
         h.cmd("ip route add default dev eth0")
         # h.setDefaultRoute("dev eth0 via %s" % "10.0.0.254" )
-        for j in xrange(8):
+        for j in xrange(6):
             if i != j:
                 h_dst = net.get('h%d' % (j+1) )
                 h.setARP(h_dst.IP(), h_dst.MAC())
@@ -131,4 +123,3 @@ def create_topology():
 
 if __name__ == '__main__':
     setLogLevel( 'info' )
-    create_topology()
