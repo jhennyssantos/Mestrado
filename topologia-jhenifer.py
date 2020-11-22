@@ -94,6 +94,7 @@ def create_topology():
     h1.cmd("ping -c4 10.0.0.4 &")
     h2.cmd("route add default gw 10.0.0.4")
     h2.cmd("ping -c4 10.0.0.4 &")
+    h2.cmd("sudo /etc/init.d/apache2 restart")
     h3.cmd("route add default gw 10.0.0.4")
     h3.cmd("ping -c4 10.0.0.4 &")
     h5.cmd("route add default gw 10.0.0.4")
@@ -109,6 +110,12 @@ def create_topology():
     #info( '*** Starting iperf3 servers on h2 and h4 and h6\n' )
     #h4.cmd("iperf3 -s -i 5 --logfile /tmp/saida-iperf-server-h4-%s.dat &" % (when))
     #sleep(2)
+    # info( '*** Starting apache server on h2 \n' )
+    
+    # h2.cmd("cd /usr/bin")
+    # h2.cmd("sudo ./ITGRecv -l teste.log")
+    # h1.cmd("chromium-browser --disable-security --no-sandbox --user-data-dir")
+    # sleep(2)
 
     ##################### ARP #####################
     for i in xrange(6):
