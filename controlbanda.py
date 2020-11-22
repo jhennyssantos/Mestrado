@@ -22,7 +22,8 @@ from ryu.controller.handler import CONFIG_DISPATCHER, MAIN_DISPATCHER
 from ryu.controller.handler import set_ev_cls
 from ryu.ofproto import ofproto_v1_3
 from ryu.lib.packet import packet
-from ryu.lib.packet import ethernet
+from ryu.lib.packet import ethernet, tcp, udp
+from ryu.lib.packet import ipv4
 from ryu.lib.packet import ether_types
 from ryu.topology import event, switches
 from ryu.topology.api import get_switch, get_link
@@ -54,7 +55,6 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.dst = None
         self.fluxos_ativos = {}
         self.ovs_bridge = {}
-        self.qos_list = ['00:00:00:00:00:01']
         wsgi = kwargs['wsgi']
         wsgi.register(SimpleSwitchWSGIApp,{myapp_name: self})
         # OVSDB_ADDR = 'tcp:127.0.0.1:6632'
@@ -121,6 +121,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         switch_list = get_switch(self.topology_api_app, None)
         switches=[switch.dp.id for switch in switch_list]
         links_list = get_link(self.topology_api_app, None)
+
         links = []
         backbone_ports = {}
         for link in links_list:
@@ -132,71 +133,57 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.net.add_nodes_from(switches)
         self.logger.debug("add_edges: %s" % (links))
         self.net.add_edges_from(links)
+	print "@@@ Sw: %s" % str(switches)
+        print "@@@ links: %s " % str(links)
         for sw in backbone_ports:
             self.net.node[sw]['backbone_ports'] = backbone_ports[sw]
             self.logger.debug("backbone_ports[%s] = %s " % (sw, backbone_ports[sw]))
+      
+        print  self.net.nodes()
+        print  self.net.edges()
 
 
     @set_ev_cls(ofp_event.EventOFPPacketIn, MAIN_DISPATCHER)
     def _packet_in_handler(self, ev):
-        # If you hit this you might want to increase
-        # the "miss_send_length" of your switch
-        if ev.msg.msg_len < ev.msg.total_len:
-            self.logger.debug("packet truncated: only %s of %s bytes",
-                              ev.msg.msg_len, ev.msg.total_len)
         msg = ev.msg
-        datapath = msg.datapath
-        ofproto = datapath.ofproto
-        parser = datapath.ofproto_parser
-        #obter o numero da porta em que foi recebida a mensagem de packet in
-        in_port = msg.match['in_port']
-
         pkt = packet.Packet(msg.data)
         eth = pkt.get_protocols(ethernet.ethernet)[0]
-
-        dst = eth.dst
-        src = eth.src
-
-        dpid = datapath.id
-        self.src = dpid
-
-
-        #aprender o endereco MAC para evitar FLOOD uma proxima vez
-        self.mac_to_port.setdefault(dpid, {})
+        #ipv4_pkt = pkt.get_protocol(ipv4.ipv4)
 
         if eth.ethertype == ether_types.ETH_TYPE_LLDP:
             return
 
+        
+        
+
+        # # If you hit this you might want to increase
+        # # the "miss_send_length" of your switch
+        if ev.msg.msg_len < ev.msg.total_len:
+            self.logger.debug("packet truncated: only %s of %s bytes",
+                              ev.msg.msg_len, ev.msg.total_len)
+        datapath = msg.datapath
+        ofproto = datapath.ofproto
+        parser = datapath.ofproto_parser
+
+        #remote_addr = req.remote_addr
+        # #obter o numero da porta em que foi recebida a mensagem de packet in
+        in_port = msg.match['in_port']       
+             
+        dst = eth.dst
+        src = eth.src
+        #self.logger.info("origem e: %s", src)
+
+        dpid = datapath.id
+        
+        self.src = dpid
+
+        # #aprender o endereco MAC para evitar FLOOD uma proxima vez
+        self.mac_to_port.setdefault(dpid, {})
+
+        #self.logger.info("destino e: %s", dst)
+
         self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 
-        # self.mac_to_port[dpid][src] = in_port
-
-        # if dst in self.mac_to_port[dpid]:
-        #     out_port = self.mac_to_port[dpid][dst]
-
-        # else:
-        #     out_port = ofproto.OFPP_FLOOD
-
-        # actions = [parser.OFPActionOutput(out_port)]
-
-        # if out_port != ofproto.OFPP_FLOOD:
-        #     if src in self.qos_list:
-        #         match = parser.OFPMatch(in_port=in_port, eth_src=src, eth_dst=dst)
-        #         actions.insert(0,parser.OFPActionSetQueue(0))
-        #     else:
-        #         match = parser.OFPMatch(in_port=in_port, eth_dst=dst)
-        #     self.add_flow(datapath, 1, match, actions)
-
-        # data = None
-        # if msg.buffer_id == ofproto.OFP_NO_BUFFER:
-        #     data = msg.data
-
-        # out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id, in_port=in_port, actions=actions, data=data)
-        # datapath.send_msg(out)
-
-
-
-#______Removendo codigo abaixo
         # learn a mac address to avoid FLOOD next time, except if received
         # in backbone port
         if in_port not in self.net.node[dpid].get('backbone_ports', []):
@@ -208,30 +195,120 @@ class SimpleSwitch13(app_manager.RyuApp):
             out_port = self.mac_to_sw[dst][1]
         else:
             dst_sw = None
-            #inserindo 14/11/20
             out_port = ofproto.OFPP_FLOOD
+
 
         actions = [parser.OFPActionOutput(out_port)]
 
+        # install a flow to avoid packet_in next time
         if out_port != ofproto.OFPP_FLOOD:
-            if src in self.qos_list:
-                match = parser.OFPMatch(in_port=in_port, eth_src=src, eth_dst=dst)
-                actions.insert(0,parser.OFPActionSetQueue(0))
-            else:
-                match = parser.OFPMatch(in_port=in_port, eth_dst=dst)
-            self.add_flow(datapath, 1, match, actions)
 
+
+
+            if eth.ethertype == ether_types.ETH_TYPE_IP:
+                ip = pkt.get_protocol(ipv4.ipv4)
+                source_address = ip.src
+                destination_address = ip.dst
+
+                if ((source_address == "10.0.0.1") and (destination_address == "10.0.0.2")):
+                # eth.src = "00:00:00:00:00:01"
+                # eth.dst = "00:00:00:00:00:02"
+                    match = parser.OFPMatch(eth_dst=dst)
+                    actions = [parser.OFPActionOutput(action_out_port)]
+                    self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+                    indice = "%s-%s" % (src, dst)
+                    self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port}
+
+                    self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
+
+                elif ((source_address == "10.0.0.1") and (destination_address == "10.0.0.6")):
+                 # eth.src = "00:00:00:00:00:01"
+                 # eth.dst = "00:00:00:00:00:02"
+                    match = parser.OFPMatch(eth_dst=dst)
+                    actions = [parser.OFPActionOutput(action_out_port)]
+                    self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+                    indice = "%s-%s" % (src, dst)
+                    self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port}
+
+                    self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
+
+            if msg.buffer_id != ofproto.OFP_NO_BUFFER:
+                match = 
+                self.add_flow(datapath, 1, match, actions, msg.buffer_id)
+                return
+                
+            else:
+                self.add_flow(datapath, 1, match, actions)
         data = None
         if msg.buffer_id == ofproto.OFP_NO_BUFFER:
             data = msg.data
 
-        out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id, in_port=in_port, actions=actions, data=data)
+        out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id,
+                                  in_port=in_port, actions=actions, data=data)
         datapath.send_msg(out)
 
 
-        # # if destination switch (dst_sw) is known, then we just search for a
-        # # path on the graph and install a flow along this path. Otherwise, we
-        # # flood the packet into the access ports for all switches
+            # if ((source_address == "10.0.0.2") and (destination_address == "10.0.0.6")):
+            # # eth.src = "00:00:00:00:00:01"
+            # # eth.dst = "00:00:00:00:00:02"
+            #     match = parser.OFPMatch(eth_dst=dst)
+            #     actions = [parser.OFPActionOutput(action_out_port)]
+            #     self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+            #     indice = "%s-%s" % (src, dst)
+            #     self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port}
+
+            #     self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
+
+
+            # if ((source_address == "10.0.0.3") and (destination_address == "10.0.0.6")):
+            # # eth.src = "00:00:00:00:00:01"
+            # # eth.dst = "00:00:00:00:00:02"
+            #     match = parser.OFPMatch(eth_dst=dst)
+            #     actions = [parser.OFPActionOutput(action_out_port)]
+            #     self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+            #     indice = "%s-%s" % (src, dst)
+            #     self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port}
+
+            #     self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
+        
+
+
+            # if ((source_address == "10.0.0.4") and (destination_address == "10.0.0.6")):
+            # # eth.src = "00:00:00:00:00:01"
+            # # eth.dst = "00:00:00:00:00:02"
+            #     match = parser.OFPMatch(eth_dst=dst)
+            #     actions = [parser.OFPActionOutput(action_out_port)]
+            #     self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+            #     indice = "%s-%s" % (src, dst)
+            #     self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port}
+
+            #     self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
+
+
+            # if ((source_address == "10.0.0.5") and (destination_address == "10.0.0.6")):
+            # # eth.src = "00:00:00:00:00:01"
+            # # eth.dst = "00:00:00:00:00:02"
+            #     match = parser.OFPMatch(eth_dst=dst)
+            #     actions = [parser.OFPActionOutput(action_out_port)]
+            #     self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+            #     indice = "%s-%s" % (src, dst)
+            #     self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port}
+
+            #     self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
+            
+
+
+
+
+        # if destination switch (dst_sw) is known, then we just search for a
+        # path on the graph and install a flow along this path. Otherwise, we
+        # flood the packet into the access ports for all switches
+
+
+
+
+
+
         # if dst_sw:
         #     path = nx.shortest_path(self.net, dpid, dst_sw)
         #     self.oldpath = path
@@ -239,6 +316,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         #     print "\n \n Caminho ", path
 
         #     self.logger.info("==> path(src=%s,dst=%s): %s", dpid, dst_sw, path)
+            
         #     for i in range(len(path)-1,-1,-1):
         #         sw = path[i]
 
@@ -255,8 +333,8 @@ class SimpleSwitch13(app_manager.RyuApp):
         #             next_sw = path[i+1]
         #             action_out_port = self.net.edge[sw][next_sw]['sport']
         #         self.logger.info("==> add_flow sw=%s match_in_port=%s action_out_port=%s", sw, match_in_port, action_out_port)
-        #         match = parser.OFPMatch(in_port=match_in_port,
-        #                 eth_dst=dst, eth_src=src)
+        #         match = parser.OFPMatch(eth_dst=dst)
+
         #         actions = [parser.OFPActionOutput(action_out_port)]
         #         self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
         #     indice = "%s-%s" % (src, dst)
@@ -277,6 +355,10 @@ class SimpleSwitch13(app_manager.RyuApp):
         #                 buffer_id=ofproto.OFP_NO_BUFFER,
         #                 actions=actions, data=data)
         #         datapath.send_msg(out)
+
+
+  #  def new_rule(self, client_ip):
+
 
 
     def set_queue(self, dpid, port_name):
@@ -323,6 +405,85 @@ class SimpleSwitch13(app_manager.RyuApp):
 
 
 
+#    def novarota(self, client_ip):
+        #newpath = nx.shortest_path(self.net, self.src, self.dst)
+
+        """
+        			h6 -- sw6---- sw5 -- h5 (10.0.0.5)
+       					   |	   |
+         (10.0.0.1) h1 -- sw1     sw4 -- h4 (10.0.0.4)
+                            |      |
+         (10.0.0.2) h3 -- sw3-----sw2 -- h2 (10.0.0.3)
+
+        """
+ #       if client_ip == "10.0.0.1":
+            # oldpath = sw1 <-> sw3 <-> sw2
+            # newpath = sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
+#            print "Modifica fluxos do no 1"
+#            curpath = [1,3,2]
+#            output_ports = {1: "s1-eth1", 3: "s3-eth2", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:01"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+#        elif client_ip == "10.0.0.3":
+
+#            print "modifica fluxos do no 3"
+#            curpath = [3,2]
+#            output_ports = {3: "s3-eth2", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:03"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw3 <-> sw2
+            # newpath = sw3 <-> sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
+
+#        elif client_ip == "10.0.0.4":
+
+#            print "modifica fluxos do no 4"
+#            curpath = [4,2]
+#            output_ports = {4: "s4-eth1", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:04"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw4 <-> sw2
+            # newpath = sw4 <-> sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
+
+#        elif client_ip == "10.0.0.5":
+
+#            print "modifica fluxos do no 5"
+#            curpath = [5,4,2]
+#            output_ports = {5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:05"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw5 <-> sw4 <-> sw2
+            # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
+
+
+ #       elif client_ip == "10.0.0.6":
+
+  #          print "modifica fluxos do no 6"
+   #         curpath = [6,5,4,2]
+    #        output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
+     #       src = "00:00:00:00:00:06"
+      #      dst = "00:00:00:00:00:02"
+       #     self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw6 <-> sw5 <-> sw4 <-> sw2
+            # newpath = sw6 <-> sw1 <-> sw3 <-> sw2
+
+        #print "\n \n RECALCULANDO ", newpath
+
+        #if self.oldpath != newpath:
+        #    return newpath
+        #return self.oldpath
+
+        # 1) saber qual era a rota antiga de origem para destino
+        # 2) procurar uma nova rota de origem para destino que nao seja a antiga
+        # 3) modificar a tabela de fluxo dos switches para essa nova rota
 
     def modifica_fluxos(self, src, dst, newpath):
         indice = "%s-%s" % (src, dst)

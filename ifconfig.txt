@@ -1,0 +1,179 @@
+eth0      Link encap:Ethernet  Endereço de HW 08:00:27:d3:e8:fd  
+          inet end.: 192.168.56.102  Bcast:192.168.56.255  Masc:255.255.255.0
+          endereço inet6: fe80::a00:27ff:fed3:e8fd/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:9696200 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:74247598 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:743836581 (743.8 MB) TX bytes:195528333046 (195.5 GB)
+
+lo        Link encap:Loopback Local  
+          inet end.: 127.0.0.1  Masc:255.0.0.0
+          endereço inet6: ::1/128 Escopo:Máquina
+          UP LOOPBACK RUNNING  MTU:65536  Métrica:1
+          pacotes RX:10317767 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:10317767 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1 
+          RX bytes:99246806196 (99.2 GB) TX bytes:99246806196 (99.2 GB)
+
+s1-eth1   Link encap:Ethernet  Endereço de HW 6e:40:62:b7:70:97  
+          endereço inet6: fe80::6c40:62ff:feb7:7097/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:160282 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:142464 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:466004899 (466.0 MB) TX bytes:13832472 (13.8 MB)
+
+s1-eth2   Link encap:Ethernet  Endereço de HW fa:4f:a0:e2:d9:24  
+          endereço inet6: fe80::f84f:a0ff:fee2:d924/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:276 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:277 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:20253 (20.2 KB) TX bytes:20313 (20.3 KB)
+
+s1-eth3   Link encap:Ethernet  Endereço de HW e2:0d:94:7d:8d:55  
+          endereço inet6: fe80::e00d:94ff:fe7d:8d55/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:142220 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:160282 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:13814799 (13.8 MB) TX bytes:466004899 (466.0 MB)
+
+s2-eth1   Link encap:Ethernet  Endereço de HW 3e:47:e7:cc:76:d8  
+          endereço inet6: fe80::3c47:e7ff:fecc:76d8/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:176445 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:185252 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:61475761 (61.4 MB) TX bytes:467653662 (467.6 MB)
+
+s2-eth2   Link encap:Ethernet  Endereço de HW 02:86:0c:e3:d6:74  
+          endereço inet6: fe80::86:cff:fee3:d674/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:480 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:490 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:56691 (56.6 KB) TX bytes:52757 (52.7 KB)
+
+s2-eth3   Link encap:Ethernet  Endereço de HW d2:2b:a9:3a:c6:28  
+          endereço inet6: fe80::d02b:a9ff:fe3a:c628/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:184789 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:176241 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:467598475 (467.5 MB) TX bytes:61444161 (61.4 MB)
+
+s3-eth1   Link encap:Ethernet  Endereço de HW 66:42:57:ee:6f:c4  
+          endereço inet6: fe80::6442:57ff:feee:6fc4/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:142464 erros:0 descartados:1 excesso:0 quadro:0
+          Pacotes TX:160282 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:13832472 (13.8 MB) TX bytes:466004899 (466.0 MB)
+
+s3-eth2   Link encap:Ethernet  Endereço de HW 6e:5a:91:38:34:67  
+          endereço inet6: fe80::6c5a:91ff:fe38:3467/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:185252 erros:0 descartados:1 excesso:0 quadro:0
+          Pacotes TX:176445 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:467653662 (467.6 MB) TX bytes:61475761 (61.4 MB)
+
+s3-eth3   Link encap:Ethernet  Endereço de HW 0e:38:4f:ed:64:57  
+          endereço inet6: fe80::c38:4fff:feed:6457/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:33992 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:25246 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:47644129 (47.6 MB) TX bytes:1669016 (1.6 MB)
+
+s4-eth1   Link encap:Ethernet  Endereço de HW 1a:4e:71:7c:4c:7b  
+          endereço inet6: fe80::184e:71ff:fe7c:4c7b/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:490 erros:0 descartados:1 excesso:0 quadro:0
+          Pacotes TX:480 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:52757 (52.7 KB) TX bytes:56691 (56.6 KB)
+
+s4-eth2   Link encap:Ethernet  Endereço de HW 7a:95:b5:4f:c0:92  
+          endereço inet6: fe80::7895:b5ff:fe4f:c092/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:285 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:285 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:21097 (21.0 KB) TX bytes:21097 (21.0 KB)
+
+s4-eth3   Link encap:Ethernet  Endereço de HW 22:d2:c3:73:c6:b7  
+          endereço inet6: fe80::20d2:c3ff:fe73:c6b7/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:237 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:497 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:38614 (38.6 KB) TX bytes:53481 (53.4 KB)
+
+s4-eth4   Link encap:Ethernet  Endereço de HW e2:8d:02:f3:bd:9c  
+          inet end.: 10.10.10.2  Bcast:10.10.10.3  Masc:255.255.255.252
+          endereço inet6: fe80::e08d:2ff:fef3:bd9c/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:282 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:367 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:35432 (35.4 KB) TX bytes:51468 (51.4 KB)
+
+s5-eth1   Link encap:Ethernet  Endereço de HW 5a:76:c2:82:1d:2b  
+          endereço inet6: fe80::5876:c2ff:fe82:1d2b/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:285 erros:0 descartados:1 excesso:0 quadro:0
+          Pacotes TX:285 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:21097 (21.0 KB) TX bytes:21097 (21.0 KB)
+
+s5-eth2   Link encap:Ethernet  Endereço de HW fa:81:4d:39:6b:6a  
+          endereço inet6: fe80::f881:4dff:fe39:6b6a/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:280 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:281 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:20645 (20.6 KB) TX bytes:20705 (20.7 KB)
+
+s5-eth3   Link encap:Ethernet  Endereço de HW 8a:ba:89:92:aa:c8  
+          endereço inet6: fe80::88ba:89ff:fe92:aac8/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:14 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:281 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:1172 (1.1 KB) TX bytes:20705 (20.7 KB)
+
+s5-eth4   Link encap:Ethernet  Endereço de HW f2:ac:0a:38:6d:5f  
+          endereço inet6: fe80::f0ac:aff:fe38:6d5f/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:16 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:277 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:1068 (1.0 KB) TX bytes:20313 (20.3 KB)
+
+s6-eth1   Link encap:Ethernet  Endereço de HW be:79:67:db:f6:05  
+          endereço inet6: fe80::bc79:67ff:fedb:f605/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:281 erros:0 descartados:1 excesso:0 quadro:0
+          Pacotes TX:280 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:20705 (20.7 KB) TX bytes:20645 (20.6 KB)
+
+s6-eth2   Link encap:Ethernet  Endereço de HW be:6a:b3:0c:1c:f7  
+          endereço inet6: fe80::bc6a:b3ff:fe0c:1cf7/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:277 erros:0 descartados:1 excesso:0 quadro:0
+          Pacotes TX:276 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:20313 (20.3 KB) TX bytes:20253 (20.2 KB)
+
+s6-eth3   Link encap:Ethernet  Endereço de HW 46:55:ec:e3:b7:ff  
+          endereço inet6: fe80::4455:ecff:fee3:b7ff/64 Escopo:Link
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  Métrica:1
+          pacotes RX:14 erros:0 descartados:0 excesso:0 quadro:0
+          Pacotes TX:280 erros:0 descartados:0 excesso:0 portadora:0
+          colisões:0 txqueuelen:1000 
+          RX bytes:1172 (1.1 KB) TX bytes:20645 (20.6 KB)
+

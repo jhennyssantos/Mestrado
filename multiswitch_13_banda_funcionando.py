@@ -54,7 +54,6 @@ class SimpleSwitch13(app_manager.RyuApp):
         self.dst = None
         self.fluxos_ativos = {}
         self.ovs_bridge = {}
-        self.qos_list = ['00:00:00:00:00:01']
         wsgi = kwargs['wsgi']
         wsgi.register(SimpleSwitchWSGIApp,{myapp_name: self})
         # OVSDB_ADDR = 'tcp:127.0.0.1:6632'
@@ -169,34 +168,6 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         self.logger.info("packet in %s %s %s %s", dpid, src, dst, in_port)
 
-        # self.mac_to_port[dpid][src] = in_port
-
-        # if dst in self.mac_to_port[dpid]:
-        #     out_port = self.mac_to_port[dpid][dst]
-
-        # else:
-        #     out_port = ofproto.OFPP_FLOOD
-
-        # actions = [parser.OFPActionOutput(out_port)]
-
-        # if out_port != ofproto.OFPP_FLOOD:
-        #     if src in self.qos_list:
-        #         match = parser.OFPMatch(in_port=in_port, eth_src=src, eth_dst=dst)
-        #         actions.insert(0,parser.OFPActionSetQueue(0))
-        #     else:
-        #         match = parser.OFPMatch(in_port=in_port, eth_dst=dst)
-        #     self.add_flow(datapath, 1, match, actions)
-
-        # data = None
-        # if msg.buffer_id == ofproto.OFP_NO_BUFFER:
-        #     data = msg.data
-
-        # out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id, in_port=in_port, actions=actions, data=data)
-        # datapath.send_msg(out)
-
-
-
-#______Removendo codigo abaixo
         # learn a mac address to avoid FLOOD next time, except if received
         # in backbone port
         if in_port not in self.net.node[dpid].get('backbone_ports', []):
@@ -208,75 +179,56 @@ class SimpleSwitch13(app_manager.RyuApp):
             out_port = self.mac_to_sw[dst][1]
         else:
             dst_sw = None
-            #inserindo 14/11/20
-            out_port = ofproto.OFPP_FLOOD
-
-        actions = [parser.OFPActionOutput(out_port)]
-
-        if out_port != ofproto.OFPP_FLOOD:
-            if src in self.qos_list:
-                match = parser.OFPMatch(in_port=in_port, eth_src=src, eth_dst=dst)
-                actions.insert(0,parser.OFPActionSetQueue(0))
-            else:
-                match = parser.OFPMatch(in_port=in_port, eth_dst=dst)
-            self.add_flow(datapath, 1, match, actions)
-
-        data = None
-        if msg.buffer_id == ofproto.OFP_NO_BUFFER:
-            data = msg.data
-
-        out = parser.OFPPacketOut(datapath=datapath, buffer_id=msg.buffer_id, in_port=in_port, actions=actions, data=data)
-        datapath.send_msg(out)
 
 
-        # # if destination switch (dst_sw) is known, then we just search for a
-        # # path on the graph and install a flow along this path. Otherwise, we
-        # # flood the packet into the access ports for all switches
-        # if dst_sw:
-        #     path = nx.shortest_path(self.net, dpid, dst_sw)
-        #     self.oldpath = path
-        #     self.dst = dst_sw
-        #     print "\n \n Caminho ", path
+        # if destination switch (dst_sw) is known, then we just search for a
+        # path on the graph and install a flow along this path. Otherwise, we
+        # flood the packet into the access ports for all switches
+        if dst_sw:
+            path = nx.shortest_path(self.net, dpid, dst_sw)
+            self.oldpath = path
+            self.dst = dst_sw
+            print "\n \n Caminho ", path
 
-        #     self.logger.info("==> path(src=%s,dst=%s): %s", dpid, dst_sw, path)
-        #     for i in range(len(path)-1,-1,-1):
-        #         sw = path[i]
+            self.logger.info("==> path(src=%s,dst=%s): %s", dpid, dst_sw, path)
+            for i in range(len(path)-1,-1,-1):
+                sw = path[i]
 
-        #         buff_id = None
-        #         if i == 0: # first switch
-        #             match_in_port = in_port
-        #             buff_id = msg.buffer_id
-        #         else:
-        #             prev_sw = path[i-1]
-        #             match_in_port = self.net.edge[prev_sw][sw]['dport']
-        #         if i == len(path)-1:
-        #             action_out_port = out_port
-        #         else:
-        #             next_sw = path[i+1]
-        #             action_out_port = self.net.edge[sw][next_sw]['sport']
-        #         self.logger.info("==> add_flow sw=%s match_in_port=%s action_out_port=%s", sw, match_in_port, action_out_port)
-        #         match = parser.OFPMatch(in_port=match_in_port,
-        #                 eth_dst=dst, eth_src=src)
-        #         actions = [parser.OFPActionOutput(action_out_port)]
-        #         self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
-        #     indice = "%s-%s" % (src, dst)
-        #     self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port, 'path' : path}
-        # else:
-        #     #self.logger.info("===> Destino nao conhecido")
-        #     for sw in self.net.nodes():
-        #         access_ports = set(self.net.node[sw]['ports']) - set(self.net.node[sw].get('backbone_ports', []))
-        #         self.logger.info("=====> sw=%s ports=%s backbone_ports=%s access_ports=%s" %
-        #                 (sw, self.net.node[sw]['ports'],  self.net.node[sw].get('backbone_ports', []), access_ports))
-        #         actions = []
-        #         for p in access_ports:
-        #             actions = [parser.OFPActionOutput(p)]
-        #         data = msg.data
-        #         datapath = self.net.node[sw]['conn']
-        #         out = parser.OFPPacketOut(datapath=datapath,
-        #                 in_port = ofproto.OFPP_LOCAL,
-        #                 buffer_id=ofproto.OFP_NO_BUFFER,
-        #                 actions=actions, data=data)
-        #         datapath.send_msg(out)
+                buff_id = None
+                if i == 0: # first switch
+                    match_in_port = in_port
+                    buff_id = msg.buffer_id
+                else:
+                    prev_sw = path[i-1]
+                    match_in_port = self.net.edge[prev_sw][sw]['dport']
+                if i == len(path)-1:
+                    action_out_port = out_port
+                else:
+                    next_sw = path[i+1]
+                    action_out_port = self.net.edge[sw][next_sw]['sport']
+                self.logger.info("==> add_flow sw=%s match_in_port=%s action_out_port=%s", sw, match_in_port, action_out_port)
+                match = parser.OFPMatch(in_port=match_in_port,
+                        eth_dst=dst, eth_src=src)
+                actions = [parser.OFPActionOutput(action_out_port)]
+                self.add_flow(self.net.node[sw]['conn'], 1, match, actions, buff_id)
+            indice = "%s-%s" % (src, dst)
+            self.fluxos_ativos[indice] = {'src' : src, 'dst' : dst, 'in_port' : in_port, 'out_port' : out_port, 'path' : path}
+        else:
+            #self.logger.info("===> Destino nao conhecido")
+            for sw in self.net.nodes():
+                access_ports = set(self.net.node[sw]['ports']) - set(self.net.node[sw].get('backbone_ports', []))
+                self.logger.info("=====> sw=%s ports=%s backbone_ports=%s access_ports=%s" %
+                        (sw, self.net.node[sw]['ports'],  self.net.node[sw].get('backbone_ports', []), access_ports))
+                actions = []
+                for p in access_ports:
+                    actions = [parser.OFPActionOutput(p)]
+                data = msg.data
+                datapath = self.net.node[sw]['conn']
+                out = parser.OFPPacketOut(datapath=datapath,
+                        in_port = ofproto.OFPP_LOCAL,
+                        buffer_id=ofproto.OFP_NO_BUFFER,
+                        actions=actions, data=data)
+                datapath.send_msg(out)
 
 
     def set_queue(self, dpid, port_name):
@@ -323,6 +275,85 @@ class SimpleSwitch13(app_manager.RyuApp):
 
 
 
+#    def novarota(self, client_ip):
+        #newpath = nx.shortest_path(self.net, self.src, self.dst)
+
+        """
+        			h6 -- sw6---- sw5 -- h5 (10.0.0.5)
+       					   |	   |
+         (10.0.0.1) h1 -- sw1     sw4 -- h4 (10.0.0.4)
+                            |      |
+         (10.0.0.2) h3 -- sw3-----sw2 -- h2 (10.0.0.3)
+
+        """
+ #       if client_ip == "10.0.0.1":
+            # oldpath = sw1 <-> sw3 <-> sw2
+            # newpath = sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
+#            print "Modifica fluxos do no 1"
+#            curpath = [1,3,2]
+#            output_ports = {1: "s1-eth1", 3: "s3-eth2", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:01"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+#        elif client_ip == "10.0.0.3":
+
+#            print "modifica fluxos do no 3"
+#            curpath = [3,2]
+#            output_ports = {3: "s3-eth2", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:03"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw3 <-> sw2
+            # newpath = sw3 <-> sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
+
+#        elif client_ip == "10.0.0.4":
+
+#            print "modifica fluxos do no 4"
+#            curpath = [4,2]
+#            output_ports = {4: "s4-eth1", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:04"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw4 <-> sw2
+            # newpath = sw4 <-> sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
+
+#        elif client_ip == "10.0.0.5":
+
+#            print "modifica fluxos do no 5"
+#            curpath = [5,4,2]
+#            output_ports = {5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
+#            src = "00:00:00:00:00:05"
+#            dst = "00:00:00:00:00:02"
+#            self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw5 <-> sw4 <-> sw2
+            # newpath = sw5 <-> sw6 <-> sw1 <-> sw3 <-> sw2
+
+
+ #       elif client_ip == "10.0.0.6":
+
+  #          print "modifica fluxos do no 6"
+   #         curpath = [6,5,4,2]
+    #        output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
+     #       src = "00:00:00:00:00:06"
+      #      dst = "00:00:00:00:00:02"
+       #     self.reservarecurso(src, dst, curpath, output_ports)
+
+            # oldpath = sw6 <-> sw5 <-> sw4 <-> sw2
+            # newpath = sw6 <-> sw1 <-> sw3 <-> sw2
+
+        #print "\n \n RECALCULANDO ", newpath
+
+        #if self.oldpath != newpath:
+        #    return newpath
+        #return self.oldpath
+
+        # 1) saber qual era a rota antiga de origem para destino
+        # 2) procurar uma nova rota de origem para destino que nao seja a antiga
+        # 3) modificar a tabela de fluxo dos switches para essa nova rota
 
     def modifica_fluxos(self, src, dst, newpath):
         indice = "%s-%s" % (src, dst)
