@@ -167,12 +167,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
         #remote_addr = req.remote_addr
         # #obter o numero da porta em que foi recebida a mensagem de packet in
-<<<<<<< HEAD
-        in_port = msg.match['in_port']       
-             
-=======
-        in_port = msg.match['in_port']
->>>>>>> 8e2ea4b93e962289e48283c6aca8c1772783473b
+        in_port = msg.match['in_port'             
         dst = eth.dst
         src = eth.src
         #self.logger.info("origem e: %s", src)
@@ -237,10 +232,6 @@ class SimpleSwitch13(app_manager.RyuApp):
                     self.logger.info("Origem: %s, Destino: %s, in_port: %s, out_port: %s", source_address, destination_address, in_port, out_port)
 
             if msg.buffer_id != ofproto.OFP_NO_BUFFER:
-<<<<<<< HEAD
-                match = 
-=======
->>>>>>> 8e2ea4b93e962289e48283c6aca8c1772783473b
                 self.add_flow(datapath, 1, match, actions, msg.buffer_id)
                 return
                 

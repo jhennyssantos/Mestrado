@@ -105,11 +105,15 @@ def create_topology():
 
     h1.cmd("ip neigh replace 10.0.0.4 lladdr 00:00:00:00:00:04 dev h1-eth0")
     h4.cmd("ip neigh replace 10.0.0.1 lladdr 00:00:00:00:00:01 dev h4-eth0")
+<<<<<<< HEAD
     
+=======
+>>>>>>> 8e2ea4b93e962289e48283c6aca8c1772783473b
     h6.cmd("ip neigh replace 10.0.0.4 lladdr 00:00:00:00:00:04 dev h6-eth0")
     h4.cmd("ip neigh replace 10.0.0.6 lladdr 00:00:00:00:00:06 dev h4-eth0")
     h1.cmd("ip neigh replace 10.0.0.6 lladdr 00:00:00:00:00:06 dev h1-eth0")
     h6.cmd("ip neigh replace 10.0.0.1 lladdr 00:00:00:00:00:01 dev h6-eth0")
+<<<<<<< HEAD
     h5.cmd("ip neigh replace 10.0.0.6 lladdr 00:00:00:00:00:06 dev h5-eth0")
     h6.cmd("ip neigh replace 10.0.0.5 lladdr 00:00:00:00:00:05 dev h6-eth0")
     
@@ -144,6 +148,8 @@ def create_topology():
     h5.cmd("ip neigh replace 10.0.0.1 lladdr 00:00:00:00:00:01 dev h5-eth0")
     h5.cmd("ip neigh replace 10.0.0.4 lladdr 00:00:00:00:00:04 dev h5-eth0")
     h4.cmd("ip neigh replace 10.0.0.5 lladdr 00:00:00:00:00:05 dev h4-eth0")
+=======
+>>>>>>> 8e2ea4b93e962289e48283c6aca8c1772783473b
     
     info( '*** Running CLI\n' )
     CLI( net )
