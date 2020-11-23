@@ -94,7 +94,7 @@ def create_topology():
     h1.cmd("ping -c4 10.0.0.4 &")
     h2.cmd("route add default gw 10.0.0.4")
     h2.cmd("ping -c4 10.0.0.4 &")
-    h2.cmd("sudo /etc/init.d/apache2 restart")
+    #h2.cmd("sudo /etc/init.d/apache2 restart")
     h3.cmd("route add default gw 10.0.0.4")
     h3.cmd("ping -c4 10.0.0.4 &")
     h5.cmd("route add default gw 10.0.0.4")
