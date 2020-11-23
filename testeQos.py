@@ -399,7 +399,7 @@ class SimpleSwitch13(app_manager.RyuApp):
     #            output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
                 output_ports = {"s5": 1, "s1": 2, "h6": 3}
                 
-            self.reservarecurso(src, dst, curpath, output_ports,mac_dst)
+            self.reservarecurso(src, sw, dst, curpath, output_ports, mac_dst)
 #         if client_ip == "10.0.0.1":
 #             # oldpath = sw1 <-> sw3 <-> sw2
 #             # newpath = sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2
