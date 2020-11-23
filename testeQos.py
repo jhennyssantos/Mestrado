@@ -296,7 +296,7 @@ class SimpleSwitch13(app_manager.RyuApp):
 
 
 
-    def novarota(self, sw, client_ip):
+    def novarota(self, client_ip):
         #newpath = nx.shortest_path(self.net, self.src, self.dst)
 
         """
@@ -336,8 +336,11 @@ class SimpleSwitch13(app_manager.RyuApp):
                     dst = "s%s" % curpath[idx +1]
                     mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
 
+
+
                 print "Modifica fluxos do no 1"
                 output_ports = {"s6": 2, "s3": 1,"h1": 3}
+                print "\n!!!!!!! SW e:\n %s" % sw
 
             elif sw == 2:
                 if idx < len(curpath) -1:
@@ -347,7 +350,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                     dst = "s%s" % curpath[idx +1]
                     mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
 
-                print "modifica fluxos do no 3"
+                print "modifica fluxos do no 2"
                 #output_ports = {3: 2, 2: 1}
                 output_ports = {"s3": 1, "s4": 2, "h2": 3}
 
@@ -359,7 +362,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                     dst = "s%s" % curpath[idx +1]
                     mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
 
-                print "modifica fluxos do no 4"
+                print "modifica fluxos do no 3"
                 # output_ports = {4: 1, 2: 2}
                 output_ports = {"s1": 1, "s2": 2, "h3": 3}
 
@@ -371,7 +374,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                     dst = "s%s" % curpath[idx +1]
                     mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
 
-                print "modifica fluxos do no 5"
+                print "modifica fluxos do no 4"
                 output_ports = {"s5": 2,"s2": 1, "h4": 3}
 
             elif sw == 5:
@@ -383,7 +386,7 @@ class SimpleSwitch13(app_manager.RyuApp):
                     mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
                     
 
-                print "modifica fluxos do no 6"
+                print "modifica fluxos do no 5"
     #            output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
                 output_ports = {"s6": 2, "s4": 1,"h5": 3}
         
