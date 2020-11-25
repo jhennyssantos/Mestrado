@@ -271,9 +271,9 @@ class SimpleSwitch13(app_manager.RyuApp):
         return True
 
 
-    def reservarecurso(self, sw, dst, output_ports,mac_dst):
+    def reservarecurso(self, sw, output_ports,mac_dst):
         
-        output_port = output_ports[dst]
+        output_port = output_ports[mac_dst]
         match = parser.OFPMatch(eth_dst=mac_dst)
 
         actions = [parser.OFPActionOutput(output_port)]
@@ -326,80 +326,59 @@ class SimpleSwitch13(app_manager.RyuApp):
         elif client_ip == "10.0.0.6":
             curpath = [6,5,4,2]
 
-        for idx,sw in enumerate(curpath):
-            dst='' 
-            if sw == 1:
-                if idx < len(curpath) -1:
-                    dst = "s%s" % curpath[idx +1]
-                    mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
-                else:
-                    dst = "h1"
-                    mac_dst="00:00:00:00:00:01"
 
-                print "Modifica fluxos do no 1"
-                output_ports = {"s6": 2, "s3": 1,"h1": 3}
-                print "\n!!!!!!! SW e:\n %s" % sw
+        mac_dst = "00:00:00:00:00:0%s" % client_ip[-1]
+        for sw in curpath:
+             
+            if sw == 1:
+                output_ports = {"00:00:00:00:00:04":1,
+                                "00:00:00:00:00:02":1,
+                                "00:00:00:00:00:03":1,
+                                "00:00:00:00:00:05":1,
+                                "00:00:00:00:00:01":3,
+                                }
+
 
             elif sw == 2:
-                if idx < len(curpath) -1:
-                    dst = "s%s" % curpath[idx +1]
-                    mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
-                else:
-                    dst = "h2"
-                    mac_dst="00:00:00:00:00:02"
+                output_ports = {"00:00:00:00:00:04":2,
+                                "00:00:00:00:00:03":1,
+                                "00:00:00:00:00:02":3,
+                                "00:00:00:00:00:05":2,
+                                "00:00:00:00:00:01":1,
+                                }
 
-                print "modifica fluxos do no 2"
-                #output_ports = {3: 2, 2: 1}
-                output_ports = {"s3": 1, "s4": 2, "h2": 3}
 
             elif sw == 3:
-                if idx < len(curpath) -1:
-                    dst = "s%s" % curpath[idx +1]
-                    mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
-                else:
-                    dst = "h3"
-                    mac_dst = "00:00:00:00:00:03"
+                output_ports = {"00:00:00:00:00:04":2,
+                                "00:00:00:00:00:02":2,
+                                "00:00:00:00:00:03":3,
+                                "00:00:00:00:00:05":2,
+                                "00:00:00:00:00:01":1,
+                                }
 
-                print "modifica fluxos do no 3"
-                # output_ports = {4: 1, 2: 2}
-                output_ports = {"s1": 1, "s2": 2, "h3": 3}
 
             elif sw == 4:
-                if idx < len(curpath) -1:
-                    dst = "s%s" % curpath[idx +1]
-                    mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
-                else:
-                    dst = "h4"
-                    mac_dst = "00:00:00:00:00:04"
-
-                print "modifica fluxos do no 4"
-                output_ports = {"s5": 2,"s2": 1, "h4": 3}
+                output_ports = {"00:00:00:00:00:03":1,
+                                "00:00:00:00:00:02":1,
+                                "00:00:00:00:00:04":3,
+                                "00:00:00:00:00:06":2,
+                                "00:00:00:00:00:05":2,
+                                "00:00:00:00:00:01":1,
+                                }
 
             elif sw == 5:
-                if idx < len(curpath) -1:
-                    dst = "s%s" % curpath[idx +1]
-                    mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]                    
-                else:
-                    dst = "h5"
-                    mac_dst = "00:00:00:00:00:05"
-
-                print "modifica fluxos do no 5"
-    #            output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
-                output_ports = {"s6": 2, "s4": 1,"h5": 3}
+                output_ports = {"00:00:00:00:00:04":1,
+                                "00:00:00:00:00:06":2,
+                                "00:00:00:00:00:05":3,
+                                "00:00:00:00:00:01":1,
+                                }
         
             elif sw == 6:
-                if idx < len(curpath) -1:
-                    dst = "s%s" % curpath[idx +1]
-                    mac_dst = "00:00:00:00:00:0%s" % curpath[idx +1]
-                else:
-                    dst = "h6"
-                    mac_dst = "00:00:00:00:00:06"
-                    
-                print "modifica fluxos do no 6"
-    #            output_ports = {6: "s6-eth1", 5: "s5-eth1", 4: "s4-eth1", 2: "s2-eth3"}
-                output_ports = {"s5": 1, "s1": 2, "h6": 3}
+                output_ports = {"00:00:00:00:00:04":1,
+                                "00:00:00:00:00:06":1,
+                                }
                 
-            self.reservarecurso(sw, dst, output_ports, mac_dst)
+            self.reservarecurso(sw, output_ports, mac_dst)
 #         if client_ip == "10.0.0.1":
 #             # oldpath = sw1 <-> sw3 <-> sw2
 #             # newpath = sw1 <-> sw6 <-> sw5 <-> sw4 <-> sw2

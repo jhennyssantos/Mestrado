@@ -1,272 +1,120 @@
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=161.769s, table=0, n_packets=290, n_bytes=17400, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=160.593s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=160.477s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:01 actions=output:3
- cookie=0x0, duration=161.774s, table=0, n_packets=57, n_bytes=8702, priority=0 actions=CONTROLLER:65535
+s1
+ dl_dst=00:00:00:00:00:04 actions=output:1
+ dl_dst=00:00:00:00:00:02 actions=output:1
+ dl_dst=00:00:00:00:00:03 actions=output:1
+ dl_dst=00:00:00:00:00:05 actions=output:1
+ dl_dst=00:00:00:00:00:01 actions=output:3
+
+
+
+
+
+
+s2
+dl_dst=00:00:00:00:00:04 actions=output:2
+dl_dst=00:00:00:00:00:03 actions=output:1
+dl_dst=00:00:00:00:00:02 actions=output:3
+dl_dst=00:00:00:00:00:05 actions=output:2
+dl_dst=00:00:00:00:00:01 actions=output:1
+
+
+
+
+
+s3
+dl_dst=00:00:00:00:00:04 actions=output:2
+dl_dst=00:00:00:00:00:02 actions=output:2
+dl_dst=00:00:00:00:00:03 actions=output:3
+dl_dst=00:00:00:00:00:05 actions=output:2
+dl_dst=00:00:00:00:00:01 actions=output:1
+
+
+
+
+
+
+s4
+dl_dst=00:00:00:00:00:03 actions=output:1
+dl_dst=00:00:00:00:00:02 actions=output:1
+dl_dst=00:00:00:00:00:04 actions=output:3
+dl_dst=00:00:00:00:00:06 actions=output:2
+dl_dst=00:00:00:00:00:05 actions=output:2
+dl_dst=00:00:00:00:00:01 actions=output:1
+
+
+
+
+
+
+
+s5
+dl_dst=00:00:00:00:00:04 actions=output:1
+dl_dst=00:00:00:00:00:06 actions=output:2
+dl_dst=00:00:00:00:00:05 actions=output:3
+dl_dst=00:00:00:00:00:01 actions=output:1
+
+
+
+
+
+
+
+s6
+dl_dst=00:00:00:00:00:04 actions=output:1
+dl_dst=00:00:00:00:00:06 actions=output:1
+
+
+
+
+
+
+
+
 
 mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=241.461s, table=0, n_packets=437, n_bytes=26220, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=240.285s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=240.169s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:01 actions=output:3
- cookie=0x0, duration=16.926s, table=0, n_packets=2, n_bytes=196, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=241.466s, table=0, n_packets=58, n_bytes=8800, priority=0 actions=CONTROLLER:65535
-
+dl_dst=00:00:00:00:00:04 actions=output:1
+dl_dst=00:00:00:00:00:02 actions=output:1
+dl_dst=00:00:00:00:00:03 actions=output:1
+dl_dst=00:00:00:00:00:05 actions=output:1
+dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:3
 
 
 mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=165.825s, table=0, n_packets=299, n_bytes=17940, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=164.690s, table=0, n_packets=14, n_bytes=1260, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=164.635s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=164.622s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=164.622s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=165.832s, table=0, n_packets=54, n_bytes=8496, priority=0 actions=CONTROLLER:65535
 
-
- mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=310.237s, table=0, n_packets=566, n_bytes=33960, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=309.102s, table=0, n_packets=14, n_bytes=1260, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=309.047s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=309.034s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=85.805s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=310.244s, table=0, n_packets=56, n_bytes=8710, priority=0 actions=CONTROLLER:65535
-
+dl_dst=00:00:00:00:00:03 actions=output:1
+dl_dst=00:00:00:00:00:04 actions=output:2
+dl_dst=00:00:00:00:00:02 actions=output:3
+dl_dst=00:00:00:00:00:05 actions=output:2
+dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:1
 
 
 mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=168.949s, table=0, n_packets=306, n_bytes=18360, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=167.897s, table=0, n_packets=9, n_bytes=826, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=167.843s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=167.830s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=168.957s, table=0, n_packets=48, n_bytes=7943, priority=0 actions=CONTROLLER:65535
+dl_dst=00:00:00:00:00:04 actions=output:2
+dl_dst=00:00:00:00:00:02 actions=output:2
+dl_dst=00:00:00:00:00:03 actions=output:3
+dl_dst=00:00:00:00:00:05 actions=output:2
+dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:1
+
+
+
 mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s4
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=172.036s, table=0, n_packets=312, n_bytes=18720, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=171.072s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=171.072s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=171.051s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=171.051s, table=0, n_packets=22, n_bytes=2044, priority=1,dl_dst=00:00:00:00:00:04 actions=output:3
- cookie=0x0, duration=171.039s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:05 actions=output:2
- cookie=0x0, duration=172.041s, table=0, n_packets=63, n_bytes=9246, priority=0 actions=CONTROLLER:65535
+dl_dst=00:00:00:00:00:02 actions=output:1
+dl_dst=00:00:00:00:00:03 actions=output:1
+dl_dst=00:00:00:00:00:06 actions=output:2
+dl_dst=00:00:00:00:00:04 actions=output:3
+dl_dst=00:00:00:00:00:05 actions=output:2
+dl_dst=00:00:00:00:00:01 actions=output:1
+
+
 mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s5
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=174.643s, table=0, n_packets=314, n_bytes=18840, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=173.768s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=173.755s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:05 actions=output:3
- cookie=0x0, duration=174.655s, table=0, n_packets=55, n_bytes=8522, priority=0 actions=CONTROLLER:65535
+dl_dst=00:00:00:00:00:04 actions=output:1
+dl_dst=00:00:00:00:00:06 actions=output:2
+dl_dst=00:00:00:00:00:05 actions=output:3
+dl_dst=00:00:00:00:00:01 actions=output:1
+
 mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s6
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=176.385s, table=0, n_packets=318, n_bytes=19080, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=175.758s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=176.387s, table=0, n_packets=51, n_bytes=8210, priority=0 actions=CONTROLLER:65535
-mininet-wifi> 
-
-
-
-
-###########
-
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=529.808s, table=0, n_packets=989, n_bytes=59340, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=528.632s, table=0, n_packets=325, n_bytes=26123, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=305.273s, table=0, n_packets=66, n_bytes=9168, priority=1,dl_dst=00:00:00:00:00:02 ractions=output:1
- cookie=0x0, duration=62.890s, table=0, n_packets=52, n_bytes=20833, priority=1,dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:3
- cookie=0x0, duration=529.813s, table=0, n_packets=72, n_bytes=10044, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=532.006s, table=0, n_packets=993, n_bytes=59580, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=530.871s, table=0, n_packets=2758, n_bytes=194510, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=530.803s, table=0, n_packets=889, n_bytes=65070, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=307.574s, table=0, n_packets=5354, n_bytes=12136864, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=65.189s, table=0, n_packets=114, n_bytes=80407, priority=1,dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:3
- cookie=0x0, duration=532.013s, table=0, n_packets=58, n_bytes=8924, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=535.190s, table=0, n_packets=1000, n_bytes=60000, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=534.138s, table=0, n_packets=334, n_bytes=26864, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=534.071s, table=0, n_packets=894, n_bytes=65540, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=310.841s, table=0, n_packets=1464, n_bytes=3328040, priority=1,dl_dst=00:00:00:00:00:02 actions=output:2
- cookie=0x0, duration=68.457s, table=0, n_packets=52, n_bytes=20833, priority=1,dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:3
- cookie=0x0, duration=535.198s, table=0, n_packets=52, n_bytes=8371, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s4
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=537.082s, table=0, n_packets=1004, n_bytes=60240, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=536.118s, table=0, n_packets=4168, n_bytes=9278964, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=536.118s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=536.097s, table=0, n_packets=25, n_bytes=2829, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=536.097s, table=0, n_packets=3019, n_bytes=219031, priority=1,dl_dst=00:00:00:00:00:04 actions=output:3
- cookie=0x0, duration=536.085s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:05 actions=output:2
- cookie=0x0, duration=537.087s, table=0, n_packets=67, n_bytes=9674, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s5
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=538.834s, table=0, n_packets=1006, n_bytes=60360, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=537.959s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=537.946s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:05 actions=output:3
- cookie=0x0, duration=538.846s, table=0, n_packets=59, n_bytes=8950, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s6
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=540.121s, table=0, n_packets=1010, n_bytes=60600, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=539.494s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=540.123s, table=0, n_packets=55, n_bytes=8638, priority=0 actions=CONTROLLER:65535
-
-
-
-
-
-
-ANTES
-
-
- mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=116.702s, table=0, n_packets=223, n_bytes=13380, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=115.952s, table=0, n_packets=264, n_bytes=20123, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=115.908s, table=0, n_packets=260, n_bytes=506135, priority=1,dl_dst=00:00:00:00:00:01 actions=output:3
- cookie=0x0, duration=111.407s, table=0, n_packets=337, n_bytes=62235, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=116.706s, table=0, n_packets=57, n_bytes=8478, priority=0 actions=CONTROLLER:65535
-
-
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=138.697s, table=0, n_packets=266, n_bytes=15960, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=137.989s, table=0, n_packets=305, n_bytes=23332, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=137.956s, table=0, n_packets=265, n_bytes=506670, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=137.933s, table=0, n_packets=3179, n_bytes=209966, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=133.452s, table=0, n_packets=4564, n_bytes=5820889, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=138.713s, table=0, n_packets=55, n_bytes=8420, priority=0 actions=CONTROLLER:65535
-
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=154.730s, table=0, n_packets=300, n_bytes=18000, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=154.114s, table=0, n_packets=309, n_bytes=23609, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=154.065s, table=0, n_packets=272, n_bytes=507419, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=153.993s, table=0, n_packets=5026, n_bytes=331868, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=149.563s, table=0, n_packets=7032, n_bytes=9197249, priority=1,dl_dst=00:00:00:00:00:02 actions=output:2
- cookie=0x0, duration=154.733s, table=0, n_packets=53, n_bytes=8329, priority=0 actions=CONTROLLER:65535
-
-
-
-
-DEPOIS
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=266.344s, table=0, n_packets=529, n_bytes=31740, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=265.594s, table=0, n_packets=409, n_bytes=33140, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=261.049s, table=0, n_packets=11450, n_bytes=834813, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=10.172s, table=0, n_packets=11751, n_bytes=33734926, priority=1,dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:1
- cookie=0x0, duration=266.348s, table=0, n_packets=61, n_bytes=8906, priority=0 actions=CONTROLLER:65535
-
- mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=303.093s, table=0, n_packets=600, n_bytes=36000, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=302.385s, table=0, n_packets=447, n_bytes=36279, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=302.329s, table=0, n_packets=20384, n_bytes=1345559, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=297.848s, table=0, n_packets=40824, n_bytes=41966920, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=46.976s, table=0, n_packets=11766, n_bytes=33739122, priority=1,dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:1
- cookie=0x0, duration=303.109s, table=0, n_packets=57, n_bytes=8634, priority=0 actions=CONTROLLER:65535
-
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=307.422s, table=0, n_packets=610, n_bytes=36600, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=306.806s, table=0, n_packets=443, n_bytes=35924, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=306.685s, table=0, n_packets=20847, n_bytes=1376117, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=302.255s, table=0, n_packets=41441, n_bytes=42814814, priority=1,dl_dst=00:00:00:00:00:02 actions=output:2
- cookie=0x0, duration=51.383s, table=0, n_packets=11767, n_bytes=33739229, priority=1,dl_dst=00:00:00:00:00:01 actions=set_queue:0,output:1
- cookie=0x0, duration=307.425s, table=0, n_packets=55, n_bytes=8543, priority=0 actions=CONTROLLER:65535
-
-
-
-
-ANTES2
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=29.705s, table=0, n_packets=57, n_bytes=3420, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=28.979s, table=0, n_packets=5, n_bytes=434, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=28.957s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:01 actions=output:3
- cookie=0x0, duration=15.799s, table=0, n_packets=2, n_bytes=196, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=29.709s, table=0, n_packets=48, n_bytes=7708, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=38.945s, table=0, n_packets=74, n_bytes=4440, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=38.286s, table=0, n_packets=15, n_bytes=1302, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=38.267s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=38.252s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=25.111s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=38.958s, table=0, n_packets=49, n_bytes=7801, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=39.993s, table=0, n_packets=76, n_bytes=4560, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=39.379s, table=0, n_packets=10, n_bytes=868, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=39.360s, table=0, n_packets=6, n_bytes=588, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=39.345s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=26.202s, table=0, n_packets=2, n_bytes=196, priority=1,dl_dst=00:00:00:00:00:02 actions=output:2
- cookie=0x0, duration=39.999s, table=0, n_packets=55, n_bytes=8301, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s4
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=42.616s, table=0, n_packets=80, n_bytes=4800, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=42.071s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=42.067s, table=0, n_packets=20, n_bytes=1736, priority=1,dl_dst=00:00:00:00:00:04 actions=output:3
- cookie=0x0, duration=42.056s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=42.056s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=42.042s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:05 actions=output:2
- cookie=0x0, duration=42.619s, table=0, n_packets=61, n_bytes=8700, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s5
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=43.658s, table=0, n_packets=82, n_bytes=4920, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=43.183s, table=0, n_packets=5, n_bytes=434, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=43.155s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:05 actions=output:3
- cookie=0x0, duration=43.666s, table=0, n_packets=49, n_bytes=7832, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s6
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=45.602s, table=0, n_packets=86, n_bytes=5160, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=45.606s, table=0, n_packets=50, n_bytes=7938, priority=0 actions=CONTROLLER:65535
-
-
-DEPOIS
-
-
-
-
-
-
-ANTES
-
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=38.904s, table=0, n_packets=73, n_bytes=4380, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=38.252s, table=0, n_packets=5, n_bytes=434, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=38.190s, table=0, n_packets=7, n_bytes=686, priority=1,dl_dst=00:00:00:00:00:01 actions=output:3
- cookie=0x0, duration=24.214s, table=0, n_packets=3, n_bytes=294, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=38.912s, table=0, n_packets=50, n_bytes=7910, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=44.784s, table=0, n_packets=85, n_bytes=5100, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=44.172s, table=0, n_packets=15, n_bytes=1302, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=44.135s, table=0, n_packets=7, n_bytes=686, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=44.115s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=30.139s, table=0, n_packets=7, n_bytes=686, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=44.793s, table=0, n_packets=53, n_bytes=8124, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=46.559s, table=0, n_packets=88, n_bytes=5280, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=46s, table=0, n_packets=10, n_bytes=868, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=45.943s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=45.943s, table=0, n_packets=7, n_bytes=686, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=31.967s, table=0, n_packets=3, n_bytes=294, priority=1,dl_dst=00:00:00:00:00:02 actions=output:2
- cookie=0x0, duration=46.559s, table=0, n_packets=50, n_bytes=7910, priority=0 actions=CONTROLLER:65535
-mininet-wifi> 
+dl_dst=00:00:00:00:00:04 actions=output:1
+dl_dst=00:00:00:00:00:06 actions=output:1
 
 
 
@@ -277,55 +125,4 @@ mininet-wifi>
 
 
 
-TESTE 22:12
 
-ANTES:
-
-
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s1
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=35.531s, table=0, n_packets=67, n_bytes=4020, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=34.706s, table=0, n_packets=8, n_bytes=728, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=30.137s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=25.063s, table=0, n_packets=3, n_bytes=294, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=15.906s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:05 actions=output:1
- cookie=0x0, duration=15.902s, table=0, n_packets=22, n_bytes=2156, priority=1,dl_dst=00:00:00:00:00:01 actions=output:3
- cookie=0x0, duration=35.535s, table=0, n_packets=54, n_bytes=8314, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s2
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=37.257s, table=0, n_packets=70, n_bytes=4200, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=36.510s, table=0, n_packets=18, n_bytes=1596, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=36.418s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=31.940s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:02 actions=output:3
- cookie=0x0, duration=17.710s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:05 actions=output:2
- cookie=0x0, duration=17.704s, table=0, n_packets=19, n_bytes=1862, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=37.264s, table=0, n_packets=51, n_bytes=7989, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s3
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=38.755s, table=0, n_packets=74, n_bytes=4440, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=38.074s, table=0, n_packets=13, n_bytes=1162, priority=1,dl_dst=00:00:00:00:00:04 actions=output:2
- cookie=0x0, duration=33.505s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:02 actions=output:2
- cookie=0x0, duration=28.432s, table=0, n_packets=7, n_bytes=686, priority=1,dl_dst=00:00:00:00:00:03 actions=output:3
- cookie=0x0, duration=19.275s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:05 actions=output:2
- cookie=0x0, duration=19.269s, table=0, n_packets=22, n_bytes=2156, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=38.767s, table=0, n_packets=47, n_bytes=7636, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s4
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=39.957s, table=0, n_packets=76, n_bytes=4560, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=39.303s, table=0, n_packets=23, n_bytes=2030, priority=1,dl_dst=00:00:00:00:00:04 actions=output:3
- cookie=0x0, duration=39.256s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:03 actions=output:1
- cookie=0x0, duration=39.256s, table=0, n_packets=4, n_bytes=392, priority=1,dl_dst=00:00:00:00:00:02 actions=output:1
- cookie=0x0, duration=20.552s, table=0, n_packets=12, n_bytes=1176, priority=1,dl_dst=00:00:00:00:00:05 actions=output:2
- cookie=0x0, duration=20.546s, table=0, n_packets=15, n_bytes=1470, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=39.960s, table=0, n_packets=60, n_bytes=8703, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s5
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=41.482s, table=0, n_packets=78, n_bytes=4680, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=40.908s, table=0, n_packets=5, n_bytes=434, priority=1,dl_dst=00:00:00:00:00:04 actions=output:1
- cookie=0x0, duration=22.159s, table=0, n_packets=12, n_bytes=1176, priority=1,dl_dst=00:00:00:00:00:05 actions=output:3
- cookie=0x0, duration=22.152s, table=0, n_packets=8, n_bytes=784, priority=1,dl_dst=00:00:00:00:00:01 actions=output:1
- cookie=0x0, duration=41.494s, table=0, n_packets=55, n_bytes=8332, priority=0 actions=CONTROLLER:65535
-mininet-wifi> sh ovs-ofctl -O openflow13 dump-flows s6
-OFPST_FLOW reply (OF1.3) (xid=0x2):
- cookie=0x0, duration=43.542s, table=0, n_packets=82, n_bytes=4920, priority=65535,dl_dst=01:80:c2:00:00:0e,dl_type=0x88cc actions=CONTROLLER:65535
- cookie=0x0, duration=43.548s, table=0, n_packets=59, n_bytes=8676, priority=0 actions=CONTROLLER:65535
