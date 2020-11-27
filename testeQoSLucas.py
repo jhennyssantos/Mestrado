@@ -311,7 +311,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         curpath=''
         output_ports=''
 
-        if client_ip == "10.0.0.1":
+        if client_ip == "10.0.0.1" or client_ip == "10.20.20.1":
             curpath = [1,3,2]
 
         elif client_ip == "10.0.0.3":

@@ -10,7 +10,7 @@ from mininet.log import setLogLevel, info
 import os
 from time import strftime,localtime,sleep
 
-INITIAL_BW = 10
+INITIAL_BW = 6
 
 def create_topology():
     when = strftime("%Y-%m-%d_%H:%M:%S", localtime())
@@ -55,8 +55,14 @@ def create_topology():
     net.addLink(s6,h6)
 
 
+
     # Workaround parte 1 - para adicionar interface externa ao host h4
     net.addLink(s4,h4)
+
+    net.addLink(s4,h1)
+
+    #teste interface - Lucas
+  #  net.addLink(h1,h4) 
 
     net.addController('c', controller=RemoteController, ip='127.0.0.1', port=6633)
     net.build()
@@ -83,14 +89,40 @@ def create_topology():
 
     # Workaround parte 2 - para adicionar interface externa ao host h4
     s4.cmd("ovs-vsctl del-port s4 s4-eth4")
-    s4.cmd("ifconfig s4-eth4 10.10.10.2/30 up") ## ip do hospedeiro / controlador
+    s4.cmd("ifconfig s4-eth4 10.10.10.2/24 up") ## ip do hospedeiro / controlador
     s4.cmd("route add -net 10.0.0.0/24 gw 10.10.10.1")
-    h4.cmd("ifconfig h4-eth1 10.10.10.1/30 up") ## ip do h4
+    h4.cmd("ifconfig h4-eth1 10.10.10.1/24 up") ## ip do h4
+
+    # Interface de h1 para C 
+    # s1.cmd("ovs-vsctl del-port s1 s1-eth4")
+    # s1.cmd("ifconfig s1-eth4 10.10.10.3/30 up")
+    # s1.cmd("route add -net 10.0.0.0/24 gw 10.10.10.1")
+    # h1.cmd("ifconfig h1-eth1 10.10.10.1/30 up")
+
+
+####################################################################
+    s4.cmd("ovs-vsctl del-port s4 s4-eth5")
+    s4.cmd("ifconfig s4-eth5 10.20.20.2/24 up") ## ip do hospedeiro / controlador
+    s4.cmd("route add -net 10.0.0.1/32 gw 10.20.20.1")
+    h1.cmd("ifconfig h1-eth1 10.20.20.1/24 up") ## ip do h4
+
+    #s4.cmd("ifconfig h4-eth2 10.20.0.4/16 up") ## ip do hospedeiro / controlador
+#    h4.cmd("ifconfig h4-eth2 10.20.0.4/16 up") ## ip do h4
+ #   h1.cmd("ifconfig h1-eth1 10.20.0.1/16 up") ## ip do hospedeiro / controlador
+    #h1.cmd("ip route add 10.10.10.2/32 via 10.20.0.4 dev h1-eth1") 
+    # s4.cmd("route add -net 10.20.0.0/16 gw 10.10.10.1")
+ 
+####################################################################
+
 
     # Workaround parte 3 - configurar o h4 como gateway da rede
     h4.cmd("sysctl net.ipv4.ip_forward=1")
-    h4.cmd("iptables -t nat -I POSTROUTING -o h4-eth1 -j MASQUERADE")
-    h1.cmd("route add default gw 10.0.0.4")
+    h1.cmd("sysctl net.ipv4.ip_forward=1")
+   # h4.cmd("iptables -t nat -I POSTROUTING -o h4-eth1 -j MASQUERADE")
+   # h4.cmd("iptables -t nat -I POSTROUTING -o h4-eth2 -j MASQUERADE")
+
+    #h1.cmd("route add default gw 10.0.0.4")
+    h1.cmd("route add default gw 10.20.0.4")
     h1.cmd("ping -c4 10.0.0.4 &")
     h2.cmd("route add default gw 10.0.0.4")
     h2.cmd("ping -c4 10.0.0.4 &")
