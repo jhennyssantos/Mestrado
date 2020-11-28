@@ -36,6 +36,30 @@ git commit -m "Novos testes"
 git push origin master
 
 
+
+Script de tratamento dos dados
+
+for cada in rsbufferlevel0*.dat; do awk '{if (NF<2) next; gsub(".[0-9]{3}Z$","",$1); segundo[$1] += $2 +  0.0; quantidade[$1] += 1} END { for (i in segundo) {print i,segundo[i]/quantidade[i]}}' $cada | sort -n | awk 'BEGIN {i=1} {print i,$2; i+=1}' > $cada-novo; done
+
+/home/italo/tmp/mmcc-teste/resultados/gen-stats-from-samples.py -c 95 -i 1 -f 1 -s 0 -m 600 $(ls -1 rsbufferlevel*-novo)
+
+
+
+Script para tratar a tabela de fluxo dos sw
+
+for i in {1..8} ; do echo s${i};echo {;IFS=$'\n' ;for line in $(cat comparacao.txt | grep s${i} -A 8 | grep dl) ; do MAC=$(echo $line | awk '{print $1}' | cut -d'=' -f2); OUTPORT=$(echo $line | awk '{print $2}' | cut -d'=' -f2 | cut -d':' -f2); echo \"$MAC\":$OUTPORT,  ; done ; echo } ;done
+
+
+
+
+
+
+
+
+
+
+
+
 QoS
 curl -X PUT -d '"tcp:127.0.0.1:6632"' http://localhost:8080/v1.0/conf/switches/0000000000000001/ovsdb_addr
 sudo lsof -i -P | grep LIST
