@@ -64,7 +64,8 @@ for i in range(len(switches)):
 #build queues per sw
 print config_strings
 for sw in switches:
-        queuecmd = "sudo ovs-vsctl %s -- --id=@defaultqos create qos type=linux-htb other-config:max-rate=4000000 queues=0=@q0 -- --id=@q0 create queue other-config:min-rate=1000000 other-config:max-rate=4000000" % config_strings[sw]
+        queuecmd = "sudo ovs-vsctl %s -- --id=@defaultqos create qos type=linux-htb other-config:max-rate=6000000 queues=0=@q0,1=@q1,2=@q2 -- --id=@q0 create queue other-config:min-rate=6000000 other-config:max-rate=6000000 -- --id=@q1 create queue other-config:max-rate=1000000 -- --id=@q2 create queue other-config:max-rate=5000000 other-config:min-rate=4000000" % config_strings[sw]
+        #queuecmd = "sudo ovs-vsctl %s -- --id=@defaultqos create qos type=linux-htb other-config:max-rate=4000000 queues=0=@q0 -- --id=@q0 create queue other-config:min-rate=1000000 other-config:max-rate=4000000" % config_strings[sw]
  	q_res = os.popen(queuecmd).read()
         print q_res
         print queuecmd

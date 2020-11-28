@@ -277,7 +277,7 @@ class SimpleSwitch13(app_manager.RyuApp):
         match = parser.OFPMatch(eth_dst=mac_dst)
 
         actions = [parser.OFPActionOutput(output_port)]
-        actions.insert(0,parser.OFPActionSetQueue(0))
+        actions.insert(0,parser.OFPActionSetQueue(2))
         # if ALGO:
         #     actions.insert(0,parser.OFPActionSetQueue(0))
         # elif ALGO:
