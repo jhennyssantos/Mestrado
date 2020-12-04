@@ -1,0 +1,1171 @@
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+@@@ Sw: [1]
+@@@ links: [] 
+[1]
+[]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+@@@ Sw: [1, 2]
+@@@ links: [] 
+[1, 2]
+[]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+@@@ Sw: [1, 2, 3]
+@@@ links: [] 
+[1, 2, 3]
+[]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+@@@ Sw: [1, 2, 3, 4]
+@@@ links: [(1, 3, {'dport': 1, 'sport': 1}), (3, 2, {'dport': 1, 'sport': 2}), (2, 3, {'dport': 2, 'sport': 1}), (3, 1, {'dport': 1, 'sport': 1})] 
+[1, 2, 3, 4]
+[(1, 3), (2, 3), (3, 1), (3, 2)]
+### 33:33:ff:00:00:03
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+@@@ Sw: [1, 2, 3, 4, 5]
+@@@ links: [(3, 1, {'dport': 1, 'sport': 1}), (2, 3, {'dport': 2, 'sport': 1}), (2, 4, {'dport': 1, 'sport': 2}), (4, 2, {'dport': 2, 'sport': 1}), (5, 4, {'dport': 2, 'sport': 1}), (1, 3, {'dport': 1, 'sport': 1}), (3, 2, {'dport': 1, 'sport': 2})] 
+[1, 2, 3, 4, 5]
+[(1, 3), (2, 3), (2, 4), (3, 1), (3, 2), (4, 2), (5, 4)]
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:ff:00:00:01
+### 33:33:00:00:00:16
+### 33:33:ff:00:00:04
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+@@@ Sw: [1, 2, 3, 4, 5, 6]
+@@@ links: [(3, 1, {'dport': 1, 'sport': 1}), (2, 3, {'dport': 2, 'sport': 1}), (2, 4, {'dport': 1, 'sport': 2}), (4, 2, {'dport': 2, 'sport': 1}), (5, 4, {'dport': 2, 'sport': 1}), (1, 3, {'dport': 1, 'sport': 1}), (4, 5, {'dport': 1, 'sport': 2}), (3, 2, {'dport': 1, 'sport': 2})] 
+[1, 2, 3, 4, 5, 6]
+[(1, 3), (2, 3), (2, 4), (3, 1), (3, 2), (4, 2), (4, 5), (5, 4)]
+### 33:33:ff:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+@@@ Sw: [1, 2, 3, 4, 5, 6, 7]
+@@@ links: [(3, 1, {'dport': 1, 'sport': 1}), (2, 3, {'dport': 2, 'sport': 1}), (2, 4, {'dport': 1, 'sport': 2}), (5, 6, {'dport': 1, 'sport': 2}), (4, 2, {'dport': 2, 'sport': 1}), (5, 4, {'dport': 2, 'sport': 1}), (1, 3, {'dport': 1, 'sport': 1}), (4, 5, {'dport': 1, 'sport': 2}), (3, 2, {'dport': 1, 'sport': 2}), (6, 5, {'dport': 2, 'sport': 1})] 
+[1, 2, 3, 4, 5, 6, 7]
+[(1, 3), (2, 3), (2, 4), (3, 1), (3, 2), (4, 2), (4, 5), (5, 4), (5, 6), (6, 5)]
+### 33:33:ff:00:00:05
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={})
+Action: [OFPActionOutput(len=16,max_len=65535,port=4294967293,type=0)] 
+### 33:33:00:00:00:16
+@@@ Sw: [1, 2, 3, 4, 5, 6, 7, 8]
+@@@ links: [(3, 1, {'dport': 1, 'sport': 1}), (2, 3, {'dport': 2, 'sport': 1}), (8, 7, {'dport': 2, 'sport': 1}), (2, 4, {'dport': 1, 'sport': 2}), (5, 6, {'dport': 1, 'sport': 2}), (4, 2, {'dport': 2, 'sport': 1}), (5, 4, {'dport': 2, 'sport': 1}), (1, 3, {'dport': 1, 'sport': 1}), (7, 6, {'dport': 2, 'sport': 1}), (8, 1, {'dport': 2, 'sport': 2}), (6, 7, {'dport': 1, 'sport': 2}), (4, 5, {'dport': 1, 'sport': 2}), (3, 2, {'dport': 1, 'sport': 2}), (6, 5, {'dport': 2, 'sport': 1})] 
+[1, 2, 3, 4, 5, 6, 7, 8]
+[(1, 3), (2, 3), (2, 4), (3, 1), (3, 2), (4, 2), (4, 5), (5, 4), (5, 6), (6, 5), (6, 7), (7, 6), (8, 1), (8, 7)]
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:ff:53:ee:fc
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:ff:00:00:07
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:ff:00:00:08
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### ff:ff:ff:ff:ff:ff
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:04
+
+ 
+ Caminho  [1, 3, 2, 4]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:01
+
+ 
+ Caminho  [4, 2, 3, 1]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:01'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:01'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:01'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:01'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### ff:ff:ff:ff:ff:ff
+### ff:ff:ff:ff:ff:ff
+### 00:00:00:00:00:04
+
+ 
+ Caminho  [7, 6, 5, 4]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:04
+
+ 
+ Caminho  [6, 5, 4]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:04
+
+ 
+ Caminho  [5, 4]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:04
+
+ 
+ Caminho  [8, 1, 3, 2, 4]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 33:33:00:00:00:16
+### 00:00:00:00:00:04
+
+ 
+ Caminho  [5, 4]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:04'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:03
+
+ 
+ Caminho  [4, 2, 3]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:03'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:03'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:03'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### ff:ff:ff:ff:ff:ff
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### ff:ff:ff:ff:ff:ff
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:07
+
+ 
+ Caminho  [4, 5, 6, 7]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 00:00:00:00:00:08
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+### 00:00:00:00:00:07
+
+ 
+ Caminho  [5, 6, 7]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:07'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:06
+
+ 
+ Caminho  [4, 5, 6]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:06'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:06'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:06'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:16
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:08
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:08
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 00:00:00:00:00:08
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:02
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 01:00:5e:00:00:fb
+### 01:00:5e:00:00:16
+### 01:00:5e:00:00:16
+### 01:00:5e:00:00:fb
+### 01:00:5e:00:00:fb
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [5, 4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [5, 4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [5, 4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [5, 4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [5, 4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [5, 4, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [2, 4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [2, 4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [2, 4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [2, 4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [2, 4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:05
+
+ 
+ Caminho  [2, 4, 5]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+KWARGS={'newqlt': u'0', 'oldqlt': u'-1'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'0', 'oldqlt': u'-1'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'0', 'oldqlt': u'-1'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'0', 'oldqlt': u'-1'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'1', 'oldqlt': u'0'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'2', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'1', 'oldqlt': u'0'}
+RemoteAddr=|10.20.20.210|
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [3, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+KWARGS={'newqlt': u'2', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+### 33:33:00:00:00:fb
+KWARGS={'newqlt': u'1', 'oldqlt': u'2'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+KWARGS={'newqlt': u'0', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+KWARGS={'newqlt': u'1', 'oldqlt': u'2'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+KWARGS={'newqlt': u'0', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+### 33:33:00:00:00:fb
+KWARGS={'newqlt': u'1', 'oldqlt': u'0'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'0', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+### 00:00:00:00:00:02
+
+ 
+ Caminho  [1, 3, 2]
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:02'})
+Action: [OFPActionOutput(len=16,max_len=65509,port=1,type=0)] 
+KWARGS={'newqlt': u'1', 'oldqlt': u'0'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'1', 'oldqlt': u'0'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'2', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+KWARGS={'newqlt': u'0', 'oldqlt': u'2'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+KWARGS={'newqlt': u'0', 'oldqlt': u'1'}
+RemoteAddr=|10.20.20.210|
+!!!!!!!!!!!!!!!!!! Cliente_IP: 10.20.20.210
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=3,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+@@@@@
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+
+$$$$$$$$
+match: OFPMatch(oxm_fields={'eth_dst': '00:00:00:00:00:05'})
+Action: [OFPActionSetQueue(len=8,queue_id=3,type=21), OFPActionOutput(len=16,max_len=65509,port=2,type=0)] 
+KWARGS={'newqlt': u'1', 'oldqlt': u'0'}
+RemoteAddr=|10.20.20.210|
+### 01:00:5e:00:00:16
+### 01:00:5e:00:00:16

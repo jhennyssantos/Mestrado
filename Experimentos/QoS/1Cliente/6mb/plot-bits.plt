@@ -27,7 +27,7 @@ set style line 3 lt 3 pt 4 ps 2 lw 2 lc rgb "blue"
 set style line 4 lt 4 pt 3 ps 2 lw 2 lc rgb "red"
 set style line 5 lt 5 pt 7 ps 2 lw 2 lc rgb "cyan"
 
-set title "Seleção de Rotas - Largura de banda de 6MBits"
+set title "Reserva de Recursos - Largura de banda de 6MBits"
 set xlabel "Tempo (ms)"
 set ylabel "Ocupação do Buffer (s)"
 set xtics 500
@@ -39,10 +39,10 @@ set xrange [0:2300]
 set yrange [0:20]
 #urban_pdr.dat
 #urban_pdr.dat
-#plot "plotbufferlevel.dat" using 1:2:4:5  title "Ocupação do Buffer" with linespoints ls 1,\
+#plot "plotbufferlevel.dat" using 1:2:4:5  title "Reserva de Recurso" with linespoints ls 1,\
 #"plotbufferlevel.dat" using 1:2:4:5 notitle w yerrorbars ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
 
-plot "plotbufferlevel.dat" using 1:2  title "Ocupação do Buffer" with lines ls 1,\
+plot "plotbufferlevel.dat" using 1:2  title "Reserva de Recurso" with lines ls 1,\
 #"plotbufferlevel.dat" using 1:2 notitle ls 1,\
 #1 / 0 notitle  smooth csplines with lines ls 1
